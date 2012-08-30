@@ -1,15 +1,45 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.xml.factory;
 
+import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
-import ru.nsu.ccfit.terekhov.chat.server.commands.factory.CommandFactory;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.XmlCommand;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlLoginCommand;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class XmlCommandFactory implements CommandFactory
+import java.util.HashMap;
+import java.util.Map;
+
+public class XmlCommandFactory
 {
-	private Command command;
 
-	@Override
-	public Command getCommand()
+	private static final Map<String, Class<? extends XmlCommand>> commandMap = 
+			new HashMap<String, Class<? extends XmlCommand>>();
+	static {
+		commandMap.put("login", XmlLoginCommand.class);	
+	}
+	
+	public XmlCommand getCommand(Document xmlDocument)
 	{
-		return command;
+		String commandName = getName(xmlDocument);
+		
+		if( commandMap.containsKey(commandName) ) {
+			Class<? extends XmlCommand> commandClass = commandMap.get(commandName);
+			XmlCommand command = null;
+			try {
+				command = commandClass.newInstance();
+			} catch (InstantiationException e) {
+				throw new IllegalArgumentException(e);
+			} catch (IllegalAccessException e) {
+				throw new IllegalArgumentException(e);
+			}
+			return command;
+		}
+		throw new IllegalArgumentException(String.format("Command with name %s not exists", commandName));
+	}
+
+	private String getName(Document xmlDocument)
+	{
+		//todo
+		throw new NotImplementedException();
 	}
 }

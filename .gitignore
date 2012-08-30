@@ -1,4 +1,5 @@
 # idea project files
 /src/.idea/
 /src/*.iml
+/src/out/
 *.bak

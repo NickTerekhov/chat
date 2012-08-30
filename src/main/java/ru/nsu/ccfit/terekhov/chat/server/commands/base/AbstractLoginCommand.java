@@ -4,9 +4,9 @@ import ru.nsu.ccfit.terekhov.chat.server.commands.common.LoginCammand;
 
 public abstract class AbstractLoginCommand implements LoginCammand
 {
-	private static final String COMMAND_NAME = "login";
-	private String userName;
-	private String clientType;
+	protected static final String COMMAND_NAME = "login";
+	protected String userName;
+	protected String clientType;
 
 	public String getUserName()
 	{
