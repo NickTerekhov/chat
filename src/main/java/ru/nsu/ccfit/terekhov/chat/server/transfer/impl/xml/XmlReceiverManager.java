@@ -44,7 +44,11 @@ public class XmlReceiverManager implements ReceiverManager
 				String message = new String(messageData);
 				processMessage(message);
 			} catch (IOException e) {
-				handleUnexpectlyLogoutCommand();
+				try {
+					handleUnexpectlyLogoutCommand();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 				closeQuietly(clientSocketProcessor);
 				System.out.println("finished receiver thread");
 				return;
@@ -58,11 +62,14 @@ public class XmlReceiverManager implements ReceiverManager
 			} catch( IllegalArgumentException e ) {
 				// todo replace with logger
 				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// todo replace with logger
+				e.printStackTrace();
 			}
 		}
 	}
 
-	private void handleUnexpectlyLogoutCommand()
+	private void handleUnexpectlyLogoutCommand() throws InterruptedException
 	{
 		Command unexpectlyLogoutCommand = new UnexpectlyLogoutCommand(){
 
@@ -77,7 +84,7 @@ public class XmlReceiverManager implements ReceiverManager
 
 	}
 
-	private void processMessage(String message) throws IOException, SAXException, ParserConfigurationException
+	private void processMessage(String message) throws IOException, SAXException, ParserConfigurationException, InterruptedException
 	{
 		Document xmlDocument = XmlUtils.fromString(message);
 		XmlCommand command = commandFactory.getCommand(xmlDocument);

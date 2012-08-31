@@ -1,8 +1,8 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.base;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.LoginCammand;
+import ru.nsu.ccfit.terekhov.chat.server.commands.common.LoginCommand;
 
-public abstract class AbstractLoginCommand implements LoginCammand
+public abstract class AbstractLoginCommand implements LoginCommand
 {
 	protected static final String COMMAND_NAME = "login";
 	protected String userName;

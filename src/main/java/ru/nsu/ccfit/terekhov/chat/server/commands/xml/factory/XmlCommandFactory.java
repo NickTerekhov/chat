@@ -40,6 +40,9 @@ public class XmlCommandFactory
 	private String getName(Document xmlDocument)
 	{
 		//todo
+		String commandName = getName(xmlDocument);
+
+
 		throw new NotImplementedException();
 	}
 }
