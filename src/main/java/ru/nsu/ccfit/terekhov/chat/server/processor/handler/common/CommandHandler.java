@@ -5,5 +5,5 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 
 public interface CommandHandler
 {
-	void processCommand(Command command, ClientSocketProcessor clientSocketProcessor);
+	void processCommand(Command command, ClientSocketProcessor clientSocketProcessor) throws InterruptedException;
 }

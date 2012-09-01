@@ -2,8 +2,8 @@ package ru.nsu.ccfit.terekhov.chat.server.commands.xml.factory;
 
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.XmlCommand;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlLoginCommand;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.XmlCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LoginCommandCreator;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashMap;
@@ -12,27 +12,19 @@ import java.util.Map;
 public class XmlCommandFactory
 {
 
-	private static final Map<String, Class<? extends XmlCommand>> commandMap = 
-			new HashMap<String, Class<? extends XmlCommand>>();
+	private static final Map<String, XmlCommandCreator> commandCreatorMap =
+			new HashMap<String, XmlCommandCreator>();
 	static {
-		commandMap.put("login", XmlLoginCommand.class);	
+		commandCreatorMap.put("login", new LoginCommandCreator());
 	}
 	
-	public XmlCommand getCommand(Document xmlDocument)
+	public Command getCommand(Document xmlDocument)
 	{
 		String commandName = getName(xmlDocument);
 		
-		if( commandMap.containsKey(commandName) ) {
-			Class<? extends XmlCommand> commandClass = commandMap.get(commandName);
-			XmlCommand command = null;
-			try {
-				command = commandClass.newInstance();
-			} catch (InstantiationException e) {
-				throw new IllegalArgumentException(e);
-			} catch (IllegalAccessException e) {
-				throw new IllegalArgumentException(e);
-			}
-			return command;
+		if( commandCreatorMap.containsKey(commandName) ) {
+			XmlCommandCreator commandCreator = commandCreatorMap.get(commandName);
+			return commandCreator.createCommand(xmlDocument);
 		}
 		throw new IllegalArgumentException(String.format("Command with name %s not exists", commandName));
 	}
@@ -40,9 +32,6 @@ public class XmlCommandFactory
 	private String getName(Document xmlDocument)
 	{
 		//todo
-		String commandName = getName(xmlDocument);
-
-
 		throw new NotImplementedException();
 	}
 }

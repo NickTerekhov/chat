@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class ClientCommandProcessor implements Runnable
 {
 	private final static int QUEUE_SIZE = 100;
+	private final static long DELAY_TIME = 1000;
 	private final ArrayBlockingQueue<CommandTask> commandTasksQueue = new ArrayBlockingQueue<CommandTask>(QUEUE_SIZE);
 
 	public void addCommandTask(CommandTask commandTask) throws InterruptedException
@@ -21,20 +22,16 @@ public class ClientCommandProcessor implements Runnable
 	@Override
 	public void run()
 	{
-		long delayTime = 1000;
-
-
-		for (;;)
-		{
+		for (; ; ) {
 			try {
-				CommandTask task = commandTasksQueue.poll(delayTime, TimeUnit.MICROSECONDS);
-				if( null == task && Thread.currentThread().isInterrupted() ) {
+				CommandTask task = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MICROSECONDS);
+				if (null == task && Thread.currentThread().isInterrupted()) {
 					// todo replace with logger
 					System.out.println("Finishing commandprocessor thread");
 					return;
 				}
 				processTask(task);
-				
+
 			} catch (InterruptedException e) {
 				// todo replace with logger
 				e.printStackTrace();

@@ -1,8 +1,10 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.base;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.LoginCommand;
+import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 
-public abstract class AbstractLoginCommand implements LoginCommand
+import java.io.Serializable;
+
+public class LoginCommand implements Command, Serializable
 {
 	protected static final String COMMAND_NAME = "login";
 	protected String userName;
@@ -16,6 +18,16 @@ public abstract class AbstractLoginCommand implements LoginCommand
 	public String getClientType()
 	{
 		return clientType;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+
+	public void setClientType(String clientType)
+	{
+		this.clientType = clientType;
 	}
 
 	@Override

@@ -1,10 +1,8 @@
 package ru.nsu.ccfit.terekhov.chat.server.event.base;
 
 import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.event.common.UserLoginEvent;
-import sun.plugin2.message.transport.SerializingTransport;
 
-public abstract class AbstractUserLoginEvent implements UserLoginEvent
+public class UserLoginEvent implements Event
 {
 	private String userName;
 	
@@ -15,9 +13,14 @@ public abstract class AbstractUserLoginEvent implements UserLoginEvent
 		return "userlogin";
 	}
 
-	@Override
+
 	public String getUserName()
 	{
 		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 }

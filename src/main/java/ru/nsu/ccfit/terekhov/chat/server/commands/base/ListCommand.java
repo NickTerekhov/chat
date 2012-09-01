@@ -1,15 +1,15 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.base;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.ListCommand;
+import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 
 import java.io.Serializable;
 
-public abstract class AbstractListCommand implements ListCommand, Serializable
+public class ListCommand implements Command, Serializable
 {
 	protected static final String COMMAND_NAME = "list";
 	protected String session;
 
-	@Override
+
 	public String getSession()
 	{
 		return session;

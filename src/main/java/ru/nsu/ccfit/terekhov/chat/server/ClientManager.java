@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.terekhov.chat.server;
 
+import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +35,12 @@ public class ClientManager
 		}
 		return false;
 	}
-	public void sendMessageToAllUsers() {
-
+	
+	public void sendEventToAllUsers(Event event) throws InterruptedException
+	{
+		for( ClientSocketProcessor clientSocketProcessor : socketProcessorlist ) {
+			TransferManager transferManager = clientSocketProcessor.getTransferManager();
+			transferManager.sendEvent(event);
+		}
 	}
 }
