@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.terekhov.chat.server.response.answer;
 
-public interface Answer
+import ru.nsu.ccfit.terekhov.chat.server.response.Response;
+
+public interface Answer extends Response
 {
 	AnswerType getType();
 }
