@@ -9,6 +9,7 @@ import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
 public class LoginCommandHandler implements CommandHandler
 {
@@ -29,6 +30,8 @@ public class LoginCommandHandler implements CommandHandler
 
 		UserInfo userInfo = clientSocketProcessor.getUserInfo();
 		userInfo.setUserName(loginCommand.getUserName());
+        userInfo.setUserStatus(UserStatus.ACCEPTED);
+
 
 		UserLoginEvent userLoginEvent = new UserLoginEvent();
 		userLoginEvent.setUserName(loginCommand.getUserName());

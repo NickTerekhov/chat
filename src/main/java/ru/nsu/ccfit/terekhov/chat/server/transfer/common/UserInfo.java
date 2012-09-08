@@ -4,8 +4,17 @@ public class UserInfo
 {
 	private String userName;
 	private String clientType;
+    private UserStatus userStatus = UserStatus.NOT_ACCEPTED;
 
-	public String getUserName()
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getUserName()
 	{
 		return userName;
 	}
