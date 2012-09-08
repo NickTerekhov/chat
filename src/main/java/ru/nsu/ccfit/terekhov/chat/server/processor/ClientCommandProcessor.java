@@ -17,6 +17,7 @@ public class ClientCommandProcessor implements Runnable {
     public void addCommandTask(CommandTask commandTask) throws InterruptedException {
         assert null != commandTask;
         commandTasksQueue.put(commandTask);
+        System.out.println("Added " + commandTask.getCommand().getClass().getName() + " Command");
     }
 
 
@@ -24,7 +25,7 @@ public class ClientCommandProcessor implements Runnable {
     public void run() {
         for (; ; ) {
             try {
-                CommandTask task = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MICROSECONDS);
+                CommandTask task = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MILLISECONDS);
                 if (null == task && Thread.currentThread().isInterrupted()) {
                     // todo replace with logger
                     System.out.println("Finishing commandprocessor thread");
@@ -44,6 +45,7 @@ public class ClientCommandProcessor implements Runnable {
 
     private void processTask(CommandTask task) throws InterruptedException {
         assert null != task;
+        System.out.println("Process " + task.getCommand().getClass().getName() + " command");
         Command command = task.getCommand();
         CommandHandler commandHandler = handlerFactory.createHandler(command);
         commandHandler.processCommand(command, task.getClientSocketProcessor());

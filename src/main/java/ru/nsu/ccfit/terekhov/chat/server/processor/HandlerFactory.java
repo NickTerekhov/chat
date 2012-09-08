@@ -9,24 +9,17 @@ import java.util.Map;
 
 public class HandlerFactory
 {
-	private static Map<String, Class<? extends CommandHandler> > commandHandlers = new HashMap<String, Class<? extends CommandHandler>>();
+	private static Map<String, CommandHandler> commandHandlers = new HashMap<String, CommandHandler>();
 	static {
-		commandHandlers.put("login", LoginCommandHandler.class);	
+		commandHandlers.put("login", new LoginCommandHandler());
 	}
 	
 	public CommandHandler createHandler ( Command command)
 	{
 		String commandName = command.getName().toLowerCase();
 		if( commandHandlers.containsKey(commandName) ) {
-			Class<? extends CommandHandler> handlerClass = commandHandlers.get(commandName);
-			try {
-				CommandHandler handlerObj = handlerClass.newInstance();
-				return handlerObj;
-			} catch (InstantiationException e) {
-				throw new IllegalArgumentException(e);
-			} catch (IllegalAccessException e) {
-				throw new IllegalArgumentException(e);
-			}
+			return commandHandlers.get(commandName);
+
 		}
 		
 		throw new IllegalArgumentException(String.format("Command handler not found for command with name %s", commandName));

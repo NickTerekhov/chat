@@ -51,7 +51,8 @@ public class XmlReceiverManager implements ReceiverManager
 				try {
 					handleUnexpectlyLogoutCommand();
 				} catch (InterruptedException e1) {
-					e1.printStackTrace();
+                    // Restore the interrupted status
+                    Thread.currentThread().interrupt();
 				}
 				closeQuietly(clientSocketProcessor);
 
