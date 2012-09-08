@@ -18,7 +18,7 @@ public class ErrorResponse implements Response
 	}
 
 	@Override
-	public ResponseType getResponceType()
+	public ResponseType getResponseType()
 	{
 		return ResponseType.ERROR;
 	}

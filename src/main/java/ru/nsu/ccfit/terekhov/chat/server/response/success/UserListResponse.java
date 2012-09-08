@@ -12,7 +12,7 @@ public class UserListResponse implements Response
 	private List<UserInfo> users = new LinkedList<UserInfo>();
 
 	@Override
-	public ResponseType getResponceType()
+	public ResponseType getResponseType()
 	{
 		return ResponseType.SUCCESS;
 	}

@@ -68,14 +68,7 @@ public class XmlReceiverManager implements ReceiverManager
 
 	private void handleUnexpectlyLogoutCommand() throws InterruptedException
 	{
-		Command unexpectlyLogoutCommand = new UnexpectlyLogoutCommand(){
-
-			@Override
-			public String getName()
-			{
-				return "unexpeclylogout";
-			}
-		};
+		Command unexpectlyLogoutCommand = new UnexpectlyLogoutCommand();
 		CommandTask commandTask = new CommandTask(clientSocketProcessor, unexpectlyLogoutCommand);
 		clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
 

@@ -3,7 +3,10 @@ package ru.nsu.ccfit.terekhov.chat;
 public class Main
 {
 	public static void main(String[] args) {
-		System.out.println("Hello, world");
-		return;
+		Server server = new Server();
+        Thread serverThread = new Thread(server);
+        serverThread.start();
+
+        System.out.println("Server started");
 	}
 }

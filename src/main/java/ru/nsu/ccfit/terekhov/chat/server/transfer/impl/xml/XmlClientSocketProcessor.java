@@ -29,6 +29,8 @@ public class XmlClientSocketProcessor implements ClientSocketProcessor
 		this.clientManager = clientManager;
 		this.transferManager = new XmlTransferManager(clientSocket, this);
 		this.receiverManager = new XmlReceiverManager(clientSocket, this);
+
+        clientManager.addSocketProcessor(this);
 	}
 
 	public XmlTransferManager getTransferManager()
