@@ -17,10 +17,10 @@ public class EventToXmlSerializersBuilder
 	}
 
 	public EventToXmlSeralizer getSeralizer(Event event) {
-		if( !seralizerMap.containsKey(event) ) {
+		if( !seralizerMap.containsKey(event.getClass()) ) {
 			// todo good message
 			throw new IllegalArgumentException();
 		}
-		return seralizerMap.get(event);
+		return seralizerMap.get(event.getClass());
 	}
 }

@@ -17,10 +17,12 @@ public class XmlCommandFactory
 	static {
 		commandCreatorMap.put("login", new LoginCommandCreator());
 	}
-	
+
+    private CommandNameResolver commandNameResolver = new CommandNameResolver();
+
 	public Command getCommand(Document xmlDocument)
 	{
-		String commandName = getName(xmlDocument);
+		String commandName = commandNameResolver.resolveName(xmlDocument);
 		
 		if( commandCreatorMap.containsKey(commandName) ) {
 			XmlCommandCreator commandCreator = commandCreatorMap.get(commandName);
@@ -29,9 +31,4 @@ public class XmlCommandFactory
 		throw new IllegalArgumentException(String.format("Command with name %s not exists", commandName));
 	}
 
-	private String getName(Document xmlDocument)
-	{
-		//todo
-		throw new NotImplementedException();
-	}
 }
