@@ -35,8 +35,7 @@ public class XmlReceiverManager implements ReceiverManager {
         DataInputStream socketReader = new DataInputStream(inputStream);
         for (; ; ) {
             if (Thread.currentThread().isInterrupted()) {
-
-                System.out.println("Receiver Thread is interrupted");
+               System.out.println("Receiver Thread is interrupted");
                 return;
             }
             try {
@@ -44,7 +43,8 @@ public class XmlReceiverManager implements ReceiverManager {
                 byte[] messageData = new byte[messageLength];
                 socketReader.readFully(messageData);
                 String message = new String(messageData);
-                processMessage(message);
+               processMessage(message);
+
             } catch (IOException e) {
                 try {
                     sendLogoutCommand();
@@ -52,7 +52,7 @@ public class XmlReceiverManager implements ReceiverManager {
                     // Restore the interrupted status
                     Thread.currentThread().interrupt();
                 }
-                closeQuietly(clientSocketProcessor);
+
 
 
             } catch (SAXException e) {
@@ -73,8 +73,8 @@ public class XmlReceiverManager implements ReceiverManager {
 
     private void sendLogoutCommand() throws InterruptedException {
         if (clientSocketProcessor.getUserInfo().getUserStatus() == UserStatus.ACCEPTED) {
+            System.out.println("Send logout command");
             LogoutCommand logoutCommand = new LogoutCommand();
-            logoutCommand.setUserName(clientSocketProcessor.getUserInfo().getUserName());
             CommandTask commandTask = new CommandTask(clientSocketProcessor, logoutCommand);
             clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
         }
@@ -86,6 +86,10 @@ public class XmlReceiverManager implements ReceiverManager {
         Command command = commandFactory.getCommand(xmlDocument);
         CommandTask commandTask = new CommandTask(clientSocketProcessor, command);
         clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
+        if ( command.getName().equals("logout") ) {
+            currentThread.interrupt();
+        }
+
     }
 
     private void closeQuietly(Closeable resourse) {

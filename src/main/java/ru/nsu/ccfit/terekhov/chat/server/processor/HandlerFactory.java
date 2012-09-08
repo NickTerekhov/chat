@@ -13,7 +13,7 @@ public class HandlerFactory
 	private static Map<String, CommandHandler> commandHandlers = new HashMap<String, CommandHandler>();
 	static {
 		commandHandlers.put("login", new LoginCommandHandler());
-        commandHandlers.put("unexpectlyloogout", new LogoutCommandHandler());
+        commandHandlers.put("logout", new LogoutCommandHandler());
 	}
 	
 	public CommandHandler createHandler ( Command command)

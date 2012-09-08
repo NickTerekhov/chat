@@ -8,19 +8,20 @@ import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
  */
 public final class LogoutCommand implements Command
 {
-    private String userName;
+     private String sessionId;
 
-    public String getUserName() {
-        return userName;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
+
 
     @Override
 	public String getName()
 	{
-		return "unexpectlyloogout";
+		return "logout";
 	}
 }

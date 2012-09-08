@@ -17,21 +17,34 @@ public class SimpleClient {
                 "<name>userName</name>" +
                 "<type>SimpleClientV01</type>" +
                 "</command>";
-        byte[] commandBytes = command.getBytes();
-        dataOutputStream.writeInt(commandBytes.length);
-        dataOutputStream.write(commandBytes);
 
-        // read response
+        sendCommand(command, dataOutputStream);
+        String readCmd = readCommand(dataInputStream);
+
+
+        System.out.println("Readed:");
+        System.out.println(readCmd);
+
+        final String logoutCommand = "<?xml version=\"1.0\"?>" +
+                "<command name=\"logout\">" +
+                "<session>12345</session>" +
+                "</command>";
+        sendCommand(logoutCommand, dataOutputStream);
+        socket.close();
+    }
+
+    private static String readCommand(DataInputStream dataInputStream) throws IOException {
         int dataSize = dataInputStream.readInt();
         byte[] data = new byte[dataSize];
         dataInputStream.readFully(data);
         String readString = new String(data);
+        return readString;
 
-        System.out.println("Readed:");
-        System.out.println(readString);
+    }
 
-        inputStream.close();
-        outputStream.close();
-        socket.close();
+    private static void sendCommand(final String command, DataOutputStream dataOutputStream) throws IOException {
+        byte[] commandBytes = command.getBytes();
+        dataOutputStream.writeInt(commandBytes.length);
+        dataOutputStream.write(commandBytes);
     }
 }

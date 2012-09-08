@@ -8,6 +8,8 @@ import ru.nsu.ccfit.terekhov.chat.server.response.event.base.UserLogoutEvent;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
+import java.io.IOException;
+
 public class LogoutCommandHandler implements CommandHandler  {
 
     @Override
@@ -15,11 +17,18 @@ public class LogoutCommandHandler implements CommandHandler  {
         LogoutCommand logoutCommand = (LogoutCommand) command;
 
         UserLogoutEvent userLogoutEvent = new UserLogoutEvent();
-        userLogoutEvent.setUserName(logoutCommand.getUserName());
+        String userName = clientSocketProcessor.getUserInfo().getUserName();
+        userLogoutEvent.setUserName(userName);
 
         ClientManager clientManager = clientSocketProcessor.getClientManager();
 
-        clientManager.sendEventToAllUsers(userLogoutEvent);
         clientSocketProcessor.getUserInfo().setUserStatus(UserStatus.LOGOUT);
+        clientManager.sendEventToAllUsers(userLogoutEvent);
+        try {
+            clientSocketProcessor.close();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 }
