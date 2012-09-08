@@ -40,7 +40,7 @@ public class ClientManager
 	{
 		for( ClientSocketProcessor clientSocketProcessor : socketProcessorlist ) {
 			TransferManager transferManager = clientSocketProcessor.getTransferManager();
-			transferManager.sendEvent(event);
+			transferManager.sendResponse(event);
 		}
 	}
 }

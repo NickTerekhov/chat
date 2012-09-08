@@ -2,6 +2,7 @@ package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.server.response.Response;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSeralizer;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSerializersBuilder;
@@ -23,7 +24,7 @@ public class XmlTransferManager implements TransferManager
 
 	private final ResponseToDocumentCreator responseToDocumentCreator = new ResponseToDocumentCreator();
 	private final EventToXmlSerializersBuilder eventToXmlSerializersBuilder = new EventToXmlSerializersBuilder();
-	private final ArrayBlockingQueue<Object> commandTasksQueue = new ArrayBlockingQueue<Object>(QUEUE_SIZE);
+	private final ArrayBlockingQueue<Response> commandTasksQueue = new ArrayBlockingQueue<Response>(QUEUE_SIZE);
 	private boolean closed = false;
 	private final OutputStream outputStream;
 	private final DataOutputStream dataOutputStream;
@@ -53,18 +54,13 @@ public class XmlTransferManager implements TransferManager
 	}
 
 	@Override
-	public void sendResponse(Answer answer) throws InterruptedException
+	public void sendResponse(Response response) throws InterruptedException
 	{
-		assert null != answer;
-		commandTasksQueue.put(answer);
+		assert null != response;
+		commandTasksQueue.put(response);
 	}
 
-	@Override
-	public void sendEvent(Event event) throws InterruptedException
-	{
-		assert null != event;
-		commandTasksQueue.put(event);
-	}
+
 
 	@Override
 	public void run()
@@ -72,13 +68,13 @@ public class XmlTransferManager implements TransferManager
 
 		for(;;) {
 			try {
-				Object task = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MICROSECONDS);
-				if (null == task && Thread.currentThread().isInterrupted()) {
+				Response response = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MICROSECONDS);
+				if (null == response && Thread.currentThread().isInterrupted()) {
 					// todo replace with logger
 					System.out.println("Finishing commandprocessor thread");
 					return;
 				}
-				processTask(task);
+				processResponse(response);
 
 			} catch (InterruptedException e) {
 				// todo replace with logger
@@ -100,12 +96,12 @@ public class XmlTransferManager implements TransferManager
 		}
 	}
 
-	private void processTask(Object task) throws IOException
+	private void processResponse(Response response) throws IOException
 	{
-		if( task instanceof Answer) {
-			processResponse((Answer) task);
-		} else if( task instanceof Event ) {
-			processEvent((Event) task);
+		if( response instanceof Answer) {
+			processAnswer((Answer) response);
+		} else if( response instanceof Event ) {
+			processEvent((Event) response);
 		} else {
 			// todo good message
 			throw new IllegalArgumentException("");
@@ -128,11 +124,11 @@ public class XmlTransferManager implements TransferManager
 		dataOutputStream.write(responseBytes);
 	}
 
-	private void processResponse(Answer task) throws IOException
+	private void processAnswer(Answer answer) throws IOException
 	{
-		assert null != task;
-		ResponseToXmlSerializer serializer = responseToDocumentCreator.createSerializer(task);
-		Document xmlDocument = serializer.ResponseToDocument(task);
+		assert null != answer;
+		ResponseToXmlSerializer serializer = responseToDocumentCreator.createSerializer(answer);
+		Document xmlDocument = serializer.ResponseToDocument(answer);
 		sendDocument(xmlDocument);
 	}
 }
