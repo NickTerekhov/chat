@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor;
 
+import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml.XmlClientSocketProcessor;
 
@@ -10,6 +12,7 @@ public class ClientCommandProcessor implements Runnable {
     private final static int QUEUE_SIZE = 100;
     private final static long DELAY_TIME = 1000;
     private final ArrayBlockingQueue<CommandTask> commandTasksQueue = new ArrayBlockingQueue<CommandTask>(QUEUE_SIZE);
+    private final HandlerFactory handlerFactory = new HandlerFactory();
 
     public void addCommandTask(CommandTask commandTask) throws InterruptedException {
         assert null != commandTask;
@@ -39,8 +42,11 @@ public class ClientCommandProcessor implements Runnable {
         }
     }
 
-    private void processTask(CommandTask task) {
+    private void processTask(CommandTask task) throws InterruptedException {
         assert null != task;
+        Command command = task.getCommand();
+        CommandHandler commandHandler = handlerFactory.createHandler(command);
+        commandHandler.processCommand(command, task.getClientSocketProcessor());
     }
 
 
