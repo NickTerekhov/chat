@@ -1,9 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -60,4 +57,25 @@ public final class XmlUtils
 			throw new RuntimeException("Error converting to String", ex);
 		}
 	}
+
+    public static void setAttribute(Node node, String name, String value) {
+        NamedNodeMap attributes = node.getAttributes();
+        Node attNode = node.getOwnerDocument().createAttribute(name);
+        attNode.setNodeValue(value);
+        attributes.setNamedItem(attNode);
+    }
+
+    public static Document createDocument() {
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = null;
+
+            docBuilder = docFactory.newDocumentBuilder();
+            return docBuilder.newDocument();
+        } catch (ParserConfigurationException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+
+    }
 }

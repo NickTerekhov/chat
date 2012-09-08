@@ -28,6 +28,8 @@ public class XmlTransferManager implements TransferManager {
     private final OutputStream outputStream;
     private final DataOutputStream dataOutputStream;
 
+    private Thread currentThread;
+
     private final static int QUEUE_SIZE = 100;
     private final static long DELAY_TIME = 1000;
 
@@ -42,10 +44,9 @@ public class XmlTransferManager implements TransferManager {
 
     @Override
     public synchronized void close() throws IOException {
-        if (!closed) {
-            outputStream.close();
-            closed = true;
-        }
+
+            currentThread.interrupt();
+
 
     }
 
@@ -60,27 +61,23 @@ public class XmlTransferManager implements TransferManager {
 
     @Override
     public void run() {
-
+        currentThread = Thread.currentThread();
         for (; ; ) {
+            if( currentThread.isInterrupted() ) {
+                System.out.println("Finished transfer thread");
+                return;
+            }
             try {
-
                 Response response = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MILLISECONDS);
-                if (null == response && Thread.currentThread().isInterrupted()) {
-                    // todo replace with logger
-                    System.out.println("Finishing commandprocessor thread");
-                    return;
-                }
                 if (null != response) {
                     processResponse(response);
                 }
 
             } catch (InterruptedException e) {
-                // todo replace with logger
-                e.printStackTrace();
+                // Restore the interrupted status
+                Thread.currentThread().interrupt();
             } catch (IOException e) {
                 closeQuietly(clientSocketProcessor);
-                System.out.println("finished receiver thread");
-                return;
             }
 
         }

@@ -21,8 +21,9 @@ public class XmlReceiverManager implements ReceiverManager
 	private final XmlCommandFactory commandFactory = new XmlCommandFactory();
 
 	private boolean closed = false;
+    private Thread currentThread;
 
-	public XmlReceiverManager(Socket clientSocket, XmlClientSocketProcessor clientSocketProcessor) throws IOException
+    public XmlReceiverManager(Socket clientSocket, XmlClientSocketProcessor clientSocketProcessor) throws IOException
 	{
 		this.clientSocket = clientSocket;
 		this.clientSocketProcessor = clientSocketProcessor;
@@ -32,8 +33,14 @@ public class XmlReceiverManager implements ReceiverManager
 	@Override
 	public void run()
 	{
+        currentThread = Thread.currentThread();
 		DataInputStream socketReader = new DataInputStream(inputStream);
 		for (; ; ) {
+            if( Thread.currentThread().isInterrupted() ) {
+
+                System.out.println("Receiver Thread is interrupted");
+                return;
+            }
 			try {
 				int messageLength = socketReader.readInt();
 				byte[] messageData = new byte[messageLength];
@@ -47,8 +54,7 @@ public class XmlReceiverManager implements ReceiverManager
 					e1.printStackTrace();
 				}
 				closeQuietly(clientSocketProcessor);
-				System.out.println("finished receiver thread");
-				return;
+
 
 			} catch (SAXException e) {
 				// todo replace with logger
@@ -60,8 +66,8 @@ public class XmlReceiverManager implements ReceiverManager
 				// todo replace with logger
 				e.printStackTrace();
 			} catch (InterruptedException e) {
-				// todo replace with logger
-				e.printStackTrace();
+                // Restore the interrupted status
+                Thread.currentThread().interrupt();
 			}
 		}
 	}
@@ -93,10 +99,6 @@ public class XmlReceiverManager implements ReceiverManager
 	@Override
 	public synchronized void close() throws IOException
 	{
-		if (!closed) {
-			inputStream.close();
-			closed = true;
-		}
-
+        currentThread.interrupt();
 	}
 }

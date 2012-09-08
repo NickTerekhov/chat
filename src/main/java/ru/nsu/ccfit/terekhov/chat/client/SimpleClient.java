@@ -30,5 +30,8 @@ public class SimpleClient {
         System.out.println("Readed:");
         System.out.println(readString);
 
+        inputStream.close();
+        outputStream.close();
+        socket.close();
     }
 }

@@ -66,6 +66,7 @@ public class XmlClientSocketProcessor implements ClientSocketProcessor
 			closeQuetly(receiverManager);
 			closeQuetly(transferManager);
 			closeQuetly(clientSocket);
+
 			closed = true;
 		}
 	}
