@@ -4,11 +4,11 @@ import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 
 import java.io.Serializable;
 
-public class LoginCommand implements Command, Serializable
+public final class LoginCommand implements Command, Serializable
 {
 	protected static final String COMMAND_NAME = "login";
-	protected String userName;
-	protected String clientType;
+	private String userName;
+	private String clientType;
 
 	public String getUserName()
 	{

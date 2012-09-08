@@ -4,10 +4,10 @@ import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 
 import java.io.Serializable;
 
-public class ListCommand implements Command, Serializable
+public final class ListCommand implements Command, Serializable
 {
 	protected static final String COMMAND_NAME = "list";
-	protected String session;
+	private String session;
 
 
 	public String getSession()

@@ -1,5 +1,6 @@
 # idea project files
-/src/.idea/
-/src/*.iml
-/src/out/
+.idea/
+*.iml
+# compile dir
+out/
 *.bak
