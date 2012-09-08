@@ -1,6 +1,6 @@
-package ru.nsu.ccfit.terekhov.chat.server.event.base;
+package ru.nsu.ccfit.terekhov.chat.server.response.event.base;
 
-import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
 
 public class UserLoginEvent implements Event
 {

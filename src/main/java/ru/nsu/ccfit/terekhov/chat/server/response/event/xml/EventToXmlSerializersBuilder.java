@@ -1,8 +1,8 @@
-package ru.nsu.ccfit.terekhov.chat.server.event.xml;
+package ru.nsu.ccfit.terekhov.chat.server.response.event.xml;
 
-import ru.nsu.ccfit.terekhov.chat.server.event.base.UserLoginEvent;
-import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.event.xml.seralizer.UserLoginEventSerializer;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.base.UserLoginEvent;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.seralizer.UserLoginEventSerializer;
 
 import java.util.HashMap;
 import java.util.Map;

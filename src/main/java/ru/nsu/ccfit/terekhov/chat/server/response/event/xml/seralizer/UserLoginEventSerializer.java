@@ -1,9 +1,9 @@
-package ru.nsu.ccfit.terekhov.chat.server.event.xml.seralizer;
+package ru.nsu.ccfit.terekhov.chat.server.response.event.xml.seralizer;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.server.event.base.UserLoginEvent;
-import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.event.xml.EventToXmlSeralizer;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.base.UserLoginEvent;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSeralizer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class UserLoginEventSerializer implements EventToXmlSeralizer

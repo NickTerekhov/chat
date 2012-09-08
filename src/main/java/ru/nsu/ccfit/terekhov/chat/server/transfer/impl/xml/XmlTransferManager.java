@@ -2,12 +2,11 @@ package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
-import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.event.xml.EventToXmlSeralizer;
-import ru.nsu.ccfit.terekhov.chat.server.event.xml.EventToXmlSerializersBuilder;
-import ru.nsu.ccfit.terekhov.chat.server.response.Response;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSeralizer;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSerializersBuilder;
+import ru.nsu.ccfit.terekhov.chat.server.response.answer.Answer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Closeable;
 import java.io.DataOutputStream;
@@ -54,10 +53,10 @@ public class XmlTransferManager implements TransferManager
 	}
 
 	@Override
-	public void sendResponse(Response response) throws InterruptedException
+	public void sendResponse(Answer answer) throws InterruptedException
 	{
-		assert null != response;
-		commandTasksQueue.put(response);
+		assert null != answer;
+		commandTasksQueue.put(answer);
 	}
 
 	@Override
@@ -103,8 +102,8 @@ public class XmlTransferManager implements TransferManager
 
 	private void processTask(Object task) throws IOException
 	{
-		if( task instanceof Response ) {
-			processResponse((Response) task);
+		if( task instanceof Answer) {
+			processResponse((Answer) task);
 		} else if( task instanceof Event ) {
 			processEvent((Event) task);
 		} else {
@@ -129,7 +128,7 @@ public class XmlTransferManager implements TransferManager
 		dataOutputStream.write(responseBytes);
 	}
 
-	private void processResponse(Response task) throws IOException
+	private void processResponse(Answer task) throws IOException
 	{
 		assert null != task;
 		ResponseToXmlSerializer serializer = responseToDocumentCreator.createSerializer(task);

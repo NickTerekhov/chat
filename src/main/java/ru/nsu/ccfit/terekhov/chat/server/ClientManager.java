@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server;
 
-import ru.nsu.ccfit.terekhov.chat.server.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 
@@ -29,7 +29,7 @@ public class ClientManager
 	public boolean hasUser(String userName) {
 		for(ClientSocketProcessor clientSocketProcessor : socketProcessorlist ) {
 			String user = clientSocketProcessor.getUserInfo().getUserName();
-			if( user.equals(userName)) {
+			if( null != user && user.equals(userName)) {
 				return true;
 			}
 		}
