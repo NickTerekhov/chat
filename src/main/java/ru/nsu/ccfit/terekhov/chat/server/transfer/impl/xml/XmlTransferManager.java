@@ -1,17 +1,17 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.common.commands.xml.stream.XmlStreamWriter;
-import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
-import ru.nsu.ccfit.terekhov.chat.server.response.Response;
-import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSerializer;
-import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSerializersBuilder;
-import ru.nsu.ccfit.terekhov.chat.server.response.answer.Answer;
+import ru.nsu.ccfit.terekhov.chat.common.xml.stream.XmlStreamWriter;
+import ru.nsu.ccfit.terekhov.chat.common.response.answer.xml.factory.ResponseToDocumentCreator;
+import ru.nsu.ccfit.terekhov.chat.common.response.answer.xml.transformers.AnswerTransformer;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
+import ru.nsu.ccfit.terekhov.chat.common.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.common.response.event.xml.transformers.EventToXmlSerializer;
+import ru.nsu.ccfit.terekhov.chat.common.response.event.xml.factory.EventToXmlSerializersBuilder;
+import ru.nsu.ccfit.terekhov.chat.common.response.answer.common.Answer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 
 import java.io.Closeable;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -114,7 +114,7 @@ public class XmlTransferManager implements TransferManager {
 
     private void processAnswer(Answer answer) throws IOException {
         assert null != answer;
-        ResponseToXmlSerializer serializer = responseToDocumentCreator.createSerializer(answer);
+        AnswerTransformer serializer = responseToDocumentCreator.createSerializer(answer);
         Document xmlDocument = serializer.ResponseToDocument(answer);
         xmlStreamWriter.write(xmlDocument);
     }

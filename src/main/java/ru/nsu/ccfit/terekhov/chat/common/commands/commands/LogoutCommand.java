@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.common.commands.commands;
 
+import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
+
 /**
  * A same workaround to solve problem when user unexpectly closed connection.
  * Command handler for this command cant csend response for this client

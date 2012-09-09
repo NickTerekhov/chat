@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
 
-import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
 import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 

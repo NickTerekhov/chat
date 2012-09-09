@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.common.commands.commands;
 
+import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
+
 public final class MessageCommand implements Command {
     private String message;
     private String session;

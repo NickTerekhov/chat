@@ -5,7 +5,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.LoginCommandTransfomer;
-import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;

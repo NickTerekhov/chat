@@ -1,8 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.common;
 
-import ru.nsu.ccfit.terekhov.chat.server.response.Response;
-import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.server.response.answer.Answer;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 
 import java.io.Closeable;
 

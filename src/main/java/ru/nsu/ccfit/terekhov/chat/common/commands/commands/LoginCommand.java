@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.common.commands.commands;
 
+import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
+
 import java.io.Serializable;
 
 public final class LoginCommand implements Command, Serializable

@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
 
 /**
  * A concrete implementation of this interface used to create valid Command

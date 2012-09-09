@@ -3,8 +3,7 @@ package ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.ListCommand;
-import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
-import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ListCommandTransfomer implements XmlCommandTransfomer<ListCommand>
