@@ -5,11 +5,12 @@ import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.MessageCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class MessageCommandTransfomer implements XmlCommandTransfomer {
+public class MessageCommandTransfomer implements XmlCommandTransfomer<MessageCommand> {
 
     @Override
-    public Command createCommand(Document xmlDocument) {
+    public MessageCommand createCommand(Document xmlDocument) {
         MessageCommand messageCommand = new MessageCommand();
         Element rootElement = xmlDocument.getDocumentElement();
 
@@ -20,5 +21,10 @@ public class MessageCommandTransfomer implements XmlCommandTransfomer {
         messageCommand.setSession(session);
 
         return messageCommand;
+    }
+
+    @Override
+    public Document createXml(MessageCommand command) {
+        throw new NotImplementedException();
     }
 }

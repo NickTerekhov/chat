@@ -5,14 +5,15 @@ import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class LoginCommandTransfomer implements XmlCommandTransfomer
+public class LoginCommandTransfomer implements XmlCommandTransfomer<LoginCommand>
 {
 	public static final String NAME_TAG = "name";
 	public static final String TYPE_TAG = "type";
 
 	@Override
-	public Command createCommand(Document xmlDocument)
+	public LoginCommand createCommand(Document xmlDocument)
 	{
 
 		LoginCommand loginCommand = new LoginCommand();
@@ -23,7 +24,12 @@ public class LoginCommandTransfomer implements XmlCommandTransfomer
 		return loginCommand;
 	}
 
-	private void fillName(Element rootElement, LoginCommand loginCommand)
+    @Override
+    public Document createXml(LoginCommand command) {
+        throw new NotImplementedException();
+    }
+
+    private void fillName(Element rootElement, LoginCommand loginCommand)
 	{
 		String name = XmlUtils.getNestedTagValue(rootElement, NAME_TAG);
 		loginCommand.setUserName(name);

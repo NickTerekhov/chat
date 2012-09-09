@@ -7,7 +7,8 @@ import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
  * A concrete implementation of this interface used to create valid Command
  * from source xml document
  */
-public interface XmlCommandTransfomer
+public interface XmlCommandTransfomer<CommandType extends Command>
 {
-	Command createCommand(Document xmlDocument);
+    CommandType createCommand(Document xmlDocument);
+    Document createXml(CommandType command);
 }
