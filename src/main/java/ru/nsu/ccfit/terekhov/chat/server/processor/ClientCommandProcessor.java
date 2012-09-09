@@ -1,9 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml.XmlClientSocketProcessor;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;

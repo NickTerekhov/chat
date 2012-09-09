@@ -3,7 +3,8 @@ package ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import ru.nsu.ccfit.terekhov.chat.server.commands.base.LoginCommand;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.LoginCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;

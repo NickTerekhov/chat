@@ -1,13 +1,12 @@
 package ru.nsu.ccfit.terekhov.chat.server.commands.xml.factory;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.XmlCommandCreator;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.ListCommandCreator;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LoginCommandCreator;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LogoutCommandCreator;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.MessageCommandCreator;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.XmlCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.ListCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.LoginCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.LogoutCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.MessageCommandCreator;
 
 import java.util.HashMap;
 import java.util.Map;

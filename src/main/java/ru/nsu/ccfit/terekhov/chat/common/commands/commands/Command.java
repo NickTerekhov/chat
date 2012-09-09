@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.server.commands.common;
+package ru.nsu.ccfit.terekhov.chat.common.commands.commands;
 
 /**
  * Represent a command that client send to server.

@@ -1,6 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.server.commands.base;
-
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
+package ru.nsu.ccfit.terekhov.chat.common.commands.commands;
 
 public final class MessageCommand implements Command {
     private String message;

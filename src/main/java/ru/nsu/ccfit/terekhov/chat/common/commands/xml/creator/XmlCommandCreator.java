@@ -1,7 +1,7 @@
-package ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator;
+package ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 
 /**
  * A concrete implementation of this interface used to create valid Command

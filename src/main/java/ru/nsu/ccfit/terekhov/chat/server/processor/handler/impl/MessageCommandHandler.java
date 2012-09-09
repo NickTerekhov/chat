@@ -1,7 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.base.LoginCommand;
-import ru.nsu.ccfit.terekhov.chat.server.commands.base.MessageCommand;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.MessageCommand;
 import ru.nsu.ccfit.terekhov.chat.server.response.answer.success.EmptySuccessAnswer;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.base.MessageEvent;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;

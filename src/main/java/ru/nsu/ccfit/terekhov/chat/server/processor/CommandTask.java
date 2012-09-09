@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor;
 
-import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 
 public class CommandTask
