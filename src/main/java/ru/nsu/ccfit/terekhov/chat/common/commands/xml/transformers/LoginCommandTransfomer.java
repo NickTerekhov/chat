@@ -32,7 +32,7 @@ public class LoginCommandTransfomer implements XmlCommandTransfomer<LoginCommand
 
         Element nameElement = xmlDocument.createElement("name");
         rootElement.appendChild(nameElement);
-        nameElement.appendChild(xmlDocument.createTextNode(command.getName()));
+        nameElement.appendChild(xmlDocument.createTextNode(command.getUserName()));
 
         Element typeElement = xmlDocument.createElement("type");
         rootElement.appendChild(typeElement);

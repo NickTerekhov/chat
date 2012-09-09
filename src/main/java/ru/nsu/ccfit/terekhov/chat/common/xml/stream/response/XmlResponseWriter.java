@@ -2,7 +2,7 @@ package ru.nsu.ccfit.terekhov.chat.common.xml.stream.response;
 
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
-import ru.nsu.ccfit.terekhov.chat.common.response.xml.factory.ResponseToDocumentCreator;
+import ru.nsu.ccfit.terekhov.chat.common.response.xml.factory.ResponseTransformerFactory;
 import ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers.ResponseTransformer;
 import ru.nsu.ccfit.terekhov.chat.common.stream.ResponseWriter;
 import ru.nsu.ccfit.terekhov.chat.common.xml.stream.XmlStreamWriter;
@@ -12,7 +12,7 @@ import java.io.OutputStream;
 
 public class XmlResponseWriter implements ResponseWriter{
 
-    private final ResponseToDocumentCreator responseToDocumentCreator = new ResponseToDocumentCreator();
+    private final ResponseTransformerFactory responseTransformerFactory = new ResponseTransformerFactory();
 
     private final XmlStreamWriter xmlStreamWriter;
 
@@ -22,7 +22,7 @@ public class XmlResponseWriter implements ResponseWriter{
 
     @Override
     public void write(Response response) throws IOException {
-        ResponseTransformer transformer = responseToDocumentCreator.createTransformer(response);
+        ResponseTransformer transformer = responseTransformerFactory.createTransformer(response);
         Document xmlDocument = transformer.ResponseToDocument(response);
         xmlStreamWriter.write(xmlDocument);
     }

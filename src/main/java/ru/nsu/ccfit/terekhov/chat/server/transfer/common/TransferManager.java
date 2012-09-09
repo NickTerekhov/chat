@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.common;
 
+import ru.nsu.ccfit.terekhov.chat.common.response.xml.factory.ResponseTransformerFactory;
 import ru.nsu.ccfit.terekhov.chat.common.stream.ResponseWriter;
-import ru.nsu.ccfit.terekhov.chat.common.response.xml.factory.ResponseToDocumentCreator;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml.XmlClientSocketProcessor;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class TransferManager implements Runnable, Closeable {
     private final XmlClientSocketProcessor clientSocketProcessor;
 
-    private final ResponseToDocumentCreator responseToDocumentCreator = new ResponseToDocumentCreator();
+    private final ResponseTransformerFactory responseTransformerFactory = new ResponseTransformerFactory();
     private final ArrayBlockingQueue<Response> commandTasksQueue = new ArrayBlockingQueue<Response>(QUEUE_SIZE);
 
     private Thread currentThread;

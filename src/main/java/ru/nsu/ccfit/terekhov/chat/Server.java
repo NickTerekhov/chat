@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Server implements Runnable {
@@ -42,21 +44,15 @@ public class Server implements Runnable {
                     processClientSocket(clientSocket);
                 } catch (SocketException e) {
                     System.out.println("Shutdowing server");
+                    int activeThreads = ((ThreadPoolExecutor) threadPool).getActiveCount();
+                    System.out.println("Wait thread pool termination, threads count " + activeThreads);
+
                     // serversocket must be already closed by calling interrupt() method
-                    threadPool.shutdown();
-                    try {
-                        System.out.println("Wait thread pool termination");
-                        if (!threadPool.awaitTermination(5, TimeUnit.SECONDS)) {
-                            System.out.println("Cant stop threadpool");
-                            return;
-                        } else {
-                            System.out.println("Thread pool shutdowing successfuly");
-                            return;
-                        }
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                        return;
-                    }
+                    List<Runnable> activeTasks = threadPool.shutdownNow();
+                     for( Runnable task : activeTasks ) {
+
+                     }
+                    return;
 
 
                 }

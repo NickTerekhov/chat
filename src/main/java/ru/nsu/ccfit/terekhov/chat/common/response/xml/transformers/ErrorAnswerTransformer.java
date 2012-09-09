@@ -3,7 +3,9 @@ package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.ErrorAnswer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ErrorAnswerTransformer extends AbstractAnswerTransformer<ErrorAnswer> {
 
@@ -14,6 +16,11 @@ public class ErrorAnswerTransformer extends AbstractAnswerTransformer<ErrorAnswe
         Element messageElement = xmlDocument.createElement("message");
         messageElement.appendChild(xmlDocument.createTextNode(message));
         rootElement.appendChild(messageElement);
+    }
+
+    @Override
+    public Response documentToResponse(Document document) {
+        throw new NotImplementedException();
     }
 
     @Override

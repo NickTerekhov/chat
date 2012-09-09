@@ -53,4 +53,8 @@ public class XmlChatClient {
     public Response get() throws IOException {
         return xmlResponseReader.read();
     }
+
+    public void close() throws IOException {
+        socket.close();
+    }
 }

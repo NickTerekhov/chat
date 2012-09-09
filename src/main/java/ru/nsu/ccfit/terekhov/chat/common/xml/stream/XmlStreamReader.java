@@ -22,6 +22,7 @@ public class XmlStreamReader implements Closeable {
         byte[] messageData = new byte[messageLength];
         dataInputStream.readFully(messageData);
         String message = new String(messageData);
+        System.out.println("Received: " + message);
         Document xmlDocument = XmlUtils.fromString(message);
         return xmlDocument;
     }

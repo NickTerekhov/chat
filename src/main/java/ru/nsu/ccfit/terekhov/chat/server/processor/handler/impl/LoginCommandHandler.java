@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
 
+import ru.nsu.ccfit.terekhov.chat.common.response.response.SessionSuccessAnswer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.*;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.ErrorAnswer;
@@ -23,6 +24,9 @@ public class LoginCommandHandler extends AbstractCommandHandler<LoginCommand>
         userInfo.setClientType(loginCommand.getClientType());
         userInfo.setUserStatus(UserStatus.ACCEPTED);
 
+        SessionSuccessAnswer successAnswer = new SessionSuccessAnswer();
+        successAnswer.setSession(clientSocketProcessor.getClientManager().getSessionId());
+        clientSocketProcessor.getTransferManager().sendResponse(successAnswer);
 
 		UserLoginEvent userLoginEvent = new UserLoginEvent();
 		userLoginEvent.setUserName(loginCommand.getUserName());

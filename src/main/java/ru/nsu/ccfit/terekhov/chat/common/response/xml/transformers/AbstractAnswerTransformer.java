@@ -43,8 +43,5 @@ public abstract class AbstractAnswerTransformer<T extends Answer> implements Ans
 
     }
 
-    @Override
-    public Response documentToResponse(Document document) {
-        throw new NotImplementedException();
-    }
+
 }

@@ -2,8 +2,10 @@ package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.UserListAnswer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAnswer> {
 
@@ -29,6 +31,11 @@ public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAns
         clientType.appendChild(xmlDocument.createTextNode(userInfo.getClientType()));
 
         return user;
+    }
+
+    @Override
+    public Response documentToResponse(Document document) {
+        throw new NotImplementedException();
     }
 
     @Override

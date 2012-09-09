@@ -10,7 +10,7 @@ import ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseToDocumentCreator
+public class ResponseTransformerFactory
 {
 	private static Map<Class<? extends Response>, AnswerTransformer> serzlizerMap
 			= new HashMap<Class<? extends Response>, AnswerTransformer>();
@@ -19,6 +19,7 @@ public class ResponseToDocumentCreator
 		serzlizerMap.put(ErrorAnswer.class, new ErrorAnswerTransformer());
         serzlizerMap.put(UserListAnswer.class, new ListAnswerTransformer());
         serzlizerMap.put(EmptySuccessAnswer.class, new EmptySuccessAnswerTransformer());
+        serzlizerMap.put(SessionSuccessAnswer.class, new SessionAnswerTransformer());
 
         eventMap.put("userlogin", new UserLoginEventTransformer());
         eventMap.put("message", new MessageEventTransformer());

@@ -22,20 +22,23 @@ public class ClientCommandProcessor implements Runnable {
     @Override
     public void run() {
         for (; ; ) {
+            if (Thread.currentThread().isInterrupted()) {
+                // todo replace with logger
+                System.out.println("Finishing commandprocessor thread");
+                return;
+            }
+
             try {
+
                 CommandTask task = commandTasksQueue.poll(DELAY_TIME, TimeUnit.MILLISECONDS);
-                if (null == task && Thread.currentThread().isInterrupted()) {
-                    // todo replace with logger
-                    System.out.println("Finishing commandprocessor thread");
-                    return;
-                }
+
                 if (null != task) {
                     processTask(task);
                 }
 
             } catch (InterruptedException e) {
-                // todo replace with logger
-                e.printStackTrace();
+                System.out.println("Interrupted");
+                Thread.currentThread().interrupt();
             }
 
         }

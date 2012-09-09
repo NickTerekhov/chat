@@ -20,7 +20,16 @@ public class LogoutCommandTransfomer implements XmlCommandTransfomer<LogoutComma
 
     @Override
     public Document createXml(LogoutCommand command) {
-        throw new NotImplementedException();
+        Document xmlDocument = XmlUtils.createDocument();
+        Element rootElement = xmlDocument.createElement("command");
+        rootElement.setAttribute("name", "logout");
+        xmlDocument.appendChild(rootElement);
+
+        Element sessionElement = xmlDocument.createElement("session");
+        rootElement.appendChild(sessionElement);
+        sessionElement.appendChild(xmlDocument.createTextNode(command.getSessionId()));
+
+        return xmlDocument;
     }
 
     private void fillSession(Element rootElement, LogoutCommand logoutCommand)
