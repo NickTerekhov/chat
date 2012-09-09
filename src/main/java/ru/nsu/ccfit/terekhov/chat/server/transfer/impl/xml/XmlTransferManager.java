@@ -19,13 +19,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class XmlTransferManager implements TransferManager {
-    private final Socket clientSocket;
     private final XmlClientSocketProcessor clientSocketProcessor;
 
     private final ResponseToDocumentCreator responseToDocumentCreator = new ResponseToDocumentCreator();
     private final EventToXmlSerializersBuilder eventToXmlSerializersBuilder = new EventToXmlSerializersBuilder();
     private final ArrayBlockingQueue<Response> commandTasksQueue = new ArrayBlockingQueue<Response>(QUEUE_SIZE);
-    private boolean closed = false;
     private final OutputStream outputStream;
     private final XmlStreamWriter xmlStreamWriter;
 
@@ -36,7 +34,6 @@ public class XmlTransferManager implements TransferManager {
 
 
     public XmlTransferManager(Socket clientSocket, XmlClientSocketProcessor clientSocketProcessor) throws IOException {
-        this.clientSocket = clientSocket;
         this.clientSocketProcessor = clientSocketProcessor;
         this.outputStream = clientSocket.getOutputStream();
         xmlStreamWriter = new XmlStreamWriter(outputStream);
