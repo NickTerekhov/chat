@@ -2,7 +2,7 @@ package ru.nsu.ccfit.terekhov.chat.server.commands.base;
 
 import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 
-public class MessageCommand implements Command {
+public final class MessageCommand implements Command {
     private String message;
     private String session;
 
