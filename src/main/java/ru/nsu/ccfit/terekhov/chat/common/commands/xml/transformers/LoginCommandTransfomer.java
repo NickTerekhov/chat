@@ -1,12 +1,12 @@
-package ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator;
+package ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 
-public class LoginCommandCreator implements XmlCommandCreator
+public class LoginCommandTransfomer implements XmlCommandTransfomer
 {
 	public static final String NAME_TAG = "name";
 	public static final String TYPE_TAG = "type";

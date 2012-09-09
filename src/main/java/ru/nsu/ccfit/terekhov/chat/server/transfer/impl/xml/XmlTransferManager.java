@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.server.response.Response;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.EventToXmlSerializer;

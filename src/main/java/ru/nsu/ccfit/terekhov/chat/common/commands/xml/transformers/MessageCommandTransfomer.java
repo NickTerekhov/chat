@@ -1,12 +1,12 @@
-package ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator;
+package ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.MessageCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 
-public class MessageCommandCreator implements XmlCommandCreator {
+public class MessageCommandTransfomer implements XmlCommandTransfomer {
 
     @Override
     public Command createCommand(Document xmlDocument) {

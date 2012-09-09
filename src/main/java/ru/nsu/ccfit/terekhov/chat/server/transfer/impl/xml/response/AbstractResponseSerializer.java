@@ -2,7 +2,7 @@ package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml.response;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.server.response.answer.Answer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml.ResponseToXmlSerializer;
 

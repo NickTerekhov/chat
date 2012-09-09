@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
-import ru.nsu.ccfit.terekhov.chat.common.commands.xml.creator.LoginCommandCreator;
-import ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl.XmlUtils;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.LoginCommandTransfomer;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class LoginCommandCreatorTest
 				"<type>SimpleClientV01</type>" +
 				"</command>";
 		Document document = XmlUtils.fromString(command);
-		LoginCommandCreator commandCreator = new LoginCommandCreator();
+		LoginCommandTransfomer commandCreator = new LoginCommandTransfomer();
 		LoginCommand loginCommand = (LoginCommand) commandCreator.createCommand(document);
 
 		assertThat("user", is(loginCommand.getUserName()));

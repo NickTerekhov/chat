@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.server.commands.xml.impl;
+package ru.nsu.ccfit.terekhov.chat.common.utils;
 
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
