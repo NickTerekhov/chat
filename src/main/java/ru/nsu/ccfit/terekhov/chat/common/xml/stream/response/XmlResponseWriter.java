@@ -22,7 +22,7 @@ public class XmlResponseWriter implements ResponseWriter{
 
     @Override
     public void write(Response response) throws IOException {
-        ResponseTransformer transformer = responseToDocumentCreator.createSerializer(response);
+        ResponseTransformer transformer = responseToDocumentCreator.createTransformer(response);
         Document xmlDocument = transformer.ResponseToDocument(response);
         xmlStreamWriter.write(xmlDocument);
     }

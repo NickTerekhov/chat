@@ -2,9 +2,11 @@ package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.MessageEvent;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class MessageEventSerializer extends AbstractEventSerializer<MessageEvent> {
+public class MessageEventTransformer extends AbstractEventTransformer<MessageEvent> {
 
 
     @Override
@@ -17,5 +19,10 @@ public class MessageEventSerializer extends AbstractEventSerializer<MessageEvent
         Element userName = xmlDocument.createElement("name");
         rootElement.appendChild(userName);
         userName.appendChild(xmlDocument.createTextNode(messageEvent.getUser()));
+    }
+
+    @Override
+    public Response documentToResponse(Document document) {
+        throw new NotImplementedException();
     }
 }

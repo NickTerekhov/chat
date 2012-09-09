@@ -30,4 +30,12 @@ public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAns
 
         return user;
     }
+
+    @Override
+    public boolean satitfied(Document xmlDocument) {
+        Element rootElement = xmlDocument.getDocumentElement();
+        return rootElement.getTagName().equals("success")
+                && xmlDocument.getElementsByTagName("listusers").getLength() == 1
+                ;
+    }
 }

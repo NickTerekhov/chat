@@ -1,7 +1,7 @@
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory.CommandNameResolver;
+import ru.nsu.ccfit.terekhov.chat.common.xml.utils.CommandNameResolver;
 import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;

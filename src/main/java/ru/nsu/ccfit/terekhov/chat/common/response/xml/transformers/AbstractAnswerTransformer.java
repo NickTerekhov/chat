@@ -5,8 +5,9 @@ import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Answer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public abstract class AbstractAnswerTransformer<T extends Answer> implements ResponseTransformer {
+public abstract class AbstractAnswerTransformer<T extends Answer> implements AnswerTransformer {
 
     protected abstract void buildAnswer(T answer, Element rootElement);
 
@@ -40,5 +41,10 @@ public abstract class AbstractAnswerTransformer<T extends Answer> implements Res
         assert null != rootElement;
         return rootElement;
 
+    }
+
+    @Override
+    public Response documentToResponse(Document document) {
+        throw new NotImplementedException();
     }
 }

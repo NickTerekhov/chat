@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory;
+package ru.nsu.ccfit.terekhov.chat.common.xml.utils;
 
 import org.w3c.dom.Document;
 

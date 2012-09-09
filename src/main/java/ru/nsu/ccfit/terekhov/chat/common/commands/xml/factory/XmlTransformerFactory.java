@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
 import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.*;
 import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.ListCommandTransfomer;
+import ru.nsu.ccfit.terekhov.chat.common.xml.utils.CommandNameResolver;
 
 import java.util.HashMap;
 import java.util.Map;

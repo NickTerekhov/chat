@@ -5,8 +5,9 @@ import org.w3c.dom.Element;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public abstract class AbstractEventSerializer<T extends Event> implements ResponseTransformer {
+public abstract class AbstractEventTransformer<T extends Event> implements ResponseTransformer {
 
     protected abstract void serialize(T concreteEvent, Element rootElement);
 
@@ -23,6 +24,8 @@ public abstract class AbstractEventSerializer<T extends Event> implements Respon
         serialize(concreteEvent, rootElement);
         return  eventDocument;
     }
+
+
 
 
 }

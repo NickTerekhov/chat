@@ -25,7 +25,20 @@ public class LoginCommandTransfomer implements XmlCommandTransfomer<LoginCommand
 
     @Override
     public Document createXml(LoginCommand command) {
-        throw new NotImplementedException();
+        Document xmlDocument = XmlUtils.createDocument();
+        Element rootElement = xmlDocument.createElement("command");
+        rootElement.setAttribute("name", "login");
+        xmlDocument.appendChild(rootElement);
+
+        Element nameElement = xmlDocument.createElement("name");
+        rootElement.appendChild(nameElement);
+        nameElement.appendChild(xmlDocument.createTextNode(command.getName()));
+
+        Element typeElement = xmlDocument.createElement("type");
+        rootElement.appendChild(typeElement);
+        typeElement.appendChild(xmlDocument.createTextNode(command.getClientType()));
+
+        return xmlDocument;
     }
 
     private void fillName(Element rootElement, LoginCommand loginCommand)
