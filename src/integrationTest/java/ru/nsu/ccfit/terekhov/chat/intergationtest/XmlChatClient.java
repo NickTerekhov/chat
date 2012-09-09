@@ -3,6 +3,7 @@ package ru.nsu.ccfit.terekhov.chat.intergationtest;
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
 import ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory.XmlTransformerFactory;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.stream.XmlStreamWriter;
 import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.XmlCommandTransfomer;
 import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 
@@ -18,6 +19,7 @@ public class XmlChatClient {
     private final int port;
 
     private Socket socket;
+    private XmlStreamWriter xmlStreamWriter;
 
     public XmlChatClient(String host, int port) {
         this.host = host;
@@ -31,11 +33,12 @@ public class XmlChatClient {
 
     public void connect() throws IOException {
         socket = new Socket(host, port);
+        this.xmlStreamWriter = new XmlStreamWriter(socket.getOutputStream());
     }
 
-    public void send(Command command) {
+    public void send(Command command) throws IOException {
         XmlCommandTransfomer transformer = xmlTransformerFactory.getTransformer(command);
         Document xmlDocument = transformer.createXml(command);
-        //XmlUtils.toString()
+        xmlStreamWriter.write(xmlDocument);
     }
 }
