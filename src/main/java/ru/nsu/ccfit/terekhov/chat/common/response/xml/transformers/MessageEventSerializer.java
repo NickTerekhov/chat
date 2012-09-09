@@ -1,9 +1,8 @@
-package ru.nsu.ccfit.terekhov.chat.common.response.event.xml.transformers;
+package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import ru.nsu.ccfit.terekhov.chat.common.response.event.event.MessageEvent;
-import ru.nsu.ccfit.terekhov.chat.common.response.event.xml.transformers.AbstractEventSerializer;
+import ru.nsu.ccfit.terekhov.chat.common.response.response.MessageEvent;
 
 public class MessageEventSerializer extends AbstractEventSerializer<MessageEvent> {
 

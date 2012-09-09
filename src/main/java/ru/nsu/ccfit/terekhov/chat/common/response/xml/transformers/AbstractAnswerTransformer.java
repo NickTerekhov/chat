@@ -1,16 +1,17 @@
-package ru.nsu.ccfit.terekhov.chat.common.response.answer.xml.transformers;
+package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
-import ru.nsu.ccfit.terekhov.chat.common.response.answer.common.Answer;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Answer;
 
-public abstract class AbstractAnswerTransformer<T extends Answer> implements AnswerTransformer {
+public abstract class AbstractAnswerTransformer<T extends Answer> implements ResponseTransformer {
 
     protected abstract void buildAnswer(T answer, Element rootElement);
 
     @Override
-    public Document ResponseToDocument(Answer answer)
+    public Document ResponseToDocument(Response answer)
     {
         T concreteAnswer = (T) answer;
         final Document xmlDocument = XmlUtils.createDocument();

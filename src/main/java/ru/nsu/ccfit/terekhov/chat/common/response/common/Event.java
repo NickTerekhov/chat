@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.common.response.event.common;
+package ru.nsu.ccfit.terekhov.chat.common.response.common;
 
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 

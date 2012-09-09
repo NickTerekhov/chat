@@ -1,7 +1,7 @@
-package ru.nsu.ccfit.terekhov.chat.common.response.event.event;
+package ru.nsu.ccfit.terekhov.chat.common.response.response;
 
 
-import ru.nsu.ccfit.terekhov.chat.common.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
 
 public class UserLogoutEvent implements Event {
     private String userName;

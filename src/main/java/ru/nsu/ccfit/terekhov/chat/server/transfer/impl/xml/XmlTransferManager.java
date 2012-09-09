@@ -1,14 +1,12 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
+import ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers.ResponseTransformer;
 import ru.nsu.ccfit.terekhov.chat.common.xml.stream.XmlStreamWriter;
-import ru.nsu.ccfit.terekhov.chat.common.response.answer.xml.factory.ResponseToDocumentCreator;
-import ru.nsu.ccfit.terekhov.chat.common.response.answer.xml.transformers.AnswerTransformer;
+import ru.nsu.ccfit.terekhov.chat.common.response.xml.factory.ResponseToDocumentCreator;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
-import ru.nsu.ccfit.terekhov.chat.common.response.event.common.Event;
-import ru.nsu.ccfit.terekhov.chat.common.response.event.xml.transformers.EventToXmlSerializer;
-import ru.nsu.ccfit.terekhov.chat.common.response.event.xml.factory.EventToXmlSerializersBuilder;
-import ru.nsu.ccfit.terekhov.chat.common.response.answer.common.Answer;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Answer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 
 import java.io.Closeable;
@@ -22,7 +20,6 @@ public class XmlTransferManager implements TransferManager {
     private final XmlClientSocketProcessor clientSocketProcessor;
 
     private final ResponseToDocumentCreator responseToDocumentCreator = new ResponseToDocumentCreator();
-    private final EventToXmlSerializersBuilder eventToXmlSerializersBuilder = new EventToXmlSerializersBuilder();
     private final ArrayBlockingQueue<Response> commandTasksQueue = new ArrayBlockingQueue<Response>(QUEUE_SIZE);
     private final OutputStream outputStream;
     private final XmlStreamWriter xmlStreamWriter;
@@ -90,29 +87,11 @@ public class XmlTransferManager implements TransferManager {
     }
 
     private void processResponse(Response response) throws IOException {
-        if (response instanceof Answer) {
-            processAnswer((Answer) response);
-        } else if (response instanceof Event) {
-            processEvent((Event) response);
-        } else {
-            // todo good message
-            throw new IllegalArgumentException("");
-        }
-    }
-
-    private void processEvent(Event event) throws IOException {
-        assert null != event;
-        EventToXmlSerializer serlizer = eventToXmlSerializersBuilder.getSeralizer(event);
-        Document eventDocument = serlizer.serializeEvent(event);
+        assert null != response;
+        ResponseTransformer serializer = responseToDocumentCreator.createSerializer(response);
+        Document eventDocument = serializer.ResponseToDocument(response);
         xmlStreamWriter.write(eventDocument);
     }
 
 
-
-    private void processAnswer(Answer answer) throws IOException {
-        assert null != answer;
-        AnswerTransformer serializer = responseToDocumentCreator.createSerializer(answer);
-        Document xmlDocument = serializer.ResponseToDocument(answer);
-        xmlStreamWriter.write(xmlDocument);
-    }
 }

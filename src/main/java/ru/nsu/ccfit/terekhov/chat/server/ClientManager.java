@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server;
 
-import ru.nsu.ccfit.terekhov.chat.common.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
