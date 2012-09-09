@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.impl.xml;
 
 import org.w3c.dom.Document;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.stream.XmlStreamWriter;
 import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.server.response.Response;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
@@ -26,7 +27,7 @@ public class XmlTransferManager implements TransferManager {
     private final ArrayBlockingQueue<Response> commandTasksQueue = new ArrayBlockingQueue<Response>(QUEUE_SIZE);
     private boolean closed = false;
     private final OutputStream outputStream;
-    private final DataOutputStream dataOutputStream;
+    private final XmlStreamWriter xmlStreamWriter;
 
     private Thread currentThread;
 
@@ -38,7 +39,7 @@ public class XmlTransferManager implements TransferManager {
         this.clientSocket = clientSocket;
         this.clientSocketProcessor = clientSocketProcessor;
         this.outputStream = clientSocket.getOutputStream();
-        dataOutputStream = new DataOutputStream(outputStream);
+        xmlStreamWriter = new XmlStreamWriter(outputStream);
     }
 
 
@@ -106,20 +107,15 @@ public class XmlTransferManager implements TransferManager {
         assert null != event;
         EventToXmlSerializer serlizer = eventToXmlSerializersBuilder.getSeralizer(event);
         Document eventDocument = serlizer.serializeEvent(event);
-        sendDocument(eventDocument);
+        xmlStreamWriter.write(eventDocument);
     }
 
-    private void sendDocument(Document xmlDocument) throws IOException {
-        String responseString = XmlUtils.toString(xmlDocument);
-        byte[] responseBytes = responseString.getBytes();
-        dataOutputStream.writeInt(responseBytes.length);
-        dataOutputStream.write(responseBytes);
-    }
+
 
     private void processAnswer(Answer answer) throws IOException {
         assert null != answer;
         ResponseToXmlSerializer serializer = responseToDocumentCreator.createSerializer(answer);
         Document xmlDocument = serializer.ResponseToDocument(answer);
-        sendDocument(xmlDocument);
+        xmlStreamWriter.write(xmlDocument);
     }
 }
