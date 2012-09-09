@@ -17,12 +17,11 @@ public class UserListAnswer implements Answer
 		return AnswerType.SUCCESS;
 	}
 
-	public void addUserInfo(UserInfo userInfo) {
-		assert null != userInfo;
-		this.users.add(userInfo);
-	}
+    public void setUsers(List<UserInfo> users) {
+        this.users = users;
+    }
 
-	public List<UserInfo> getUsers()
+    public List<UserInfo> getUsers()
 	{
 		return users;
 	}

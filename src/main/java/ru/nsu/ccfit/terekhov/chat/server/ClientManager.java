@@ -6,6 +6,7 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,5 +48,13 @@ public class ClientManager {
                 transferManager.sendResponse(event);
             }
         }
+    }
+
+    public List<UserInfo> getUsers() {
+        final List<UserInfo> userList = new ArrayList<UserInfo>();
+        for (ClientSocketProcessor clientSocketProcessor : socketProcessorlist) {
+            userList.add(clientSocketProcessor.getUserInfo());
+        }
+        return userList;
     }
 }

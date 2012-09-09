@@ -3,6 +3,7 @@ package ru.nsu.ccfit.terekhov.chat.server.commands.xml.factory;
 import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.XmlCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.ListCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LoginCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LogoutCommandCreator;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -18,6 +19,7 @@ public class XmlCommandFactory
 	static {
 		commandCreatorMap.put("login", new LoginCommandCreator());
         commandCreatorMap.put("logout", new LogoutCommandCreator());
+        commandCreatorMap.put("list", new ListCommandCreator());
 	}
 
     private CommandNameResolver commandNameResolver = new CommandNameResolver();

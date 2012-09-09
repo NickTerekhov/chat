@@ -9,8 +9,11 @@ public final class ListCommand implements Command, Serializable
 	protected static final String COMMAND_NAME = "list";
 	private String session;
 
+    public void setSession(String session) {
+        this.session = session;
+    }
 
-	public String getSession()
+    public String getSession()
 	{
 		return session;
 	}

@@ -2,6 +2,7 @@ package ru.nsu.ccfit.terekhov.chat.server.processor;
 
 import ru.nsu.ccfit.terekhov.chat.server.commands.common.Command;
 import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.ListCommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.LoginCommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.LogoutCommandHandler;
 
@@ -14,6 +15,7 @@ public class HandlerFactory
 	static {
 		commandHandlers.put("login", new LoginCommandHandler());
         commandHandlers.put("logout", new LogoutCommandHandler());
+        commandHandlers.put("list", new ListCommandHandler());
 	}
 	
 	public CommandHandler createHandler ( Command command)

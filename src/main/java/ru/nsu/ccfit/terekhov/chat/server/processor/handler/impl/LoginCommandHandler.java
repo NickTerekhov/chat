@@ -11,16 +11,12 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
-public class LoginCommandHandler implements CommandHandler
+public class LoginCommandHandler extends AbstractCommandHandler<LoginCommand>
 {
 	@Override
-	public void processCommand(Command command, ClientSocketProcessor clientSocketProcessor) throws InterruptedException
+	public void processConcreteCommand(LoginCommand loginCommand, ClientSocketProcessor clientSocketProcessor) throws InterruptedException
 	{
-		if( !(command instanceof LoginCommand) ) {
-			throw new IllegalArgumentException(String.format("LoginCommandHandler must process only login command but have command with class %s", command.getClass().getName()));
-		}
 
-		LoginCommand loginCommand = (LoginCommand) command;
 
 		ClientManager clientManager = clientSocketProcessor.getClientManager();
 		String userName = loginCommand.getUserName();

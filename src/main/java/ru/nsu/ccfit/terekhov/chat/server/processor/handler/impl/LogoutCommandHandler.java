@@ -10,11 +10,10 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
 import java.io.IOException;
 
-public class LogoutCommandHandler implements CommandHandler  {
+public class LogoutCommandHandler extends AbstractCommandHandler<LogoutCommand>  {
 
     @Override
-    public void processCommand(Command command, ClientSocketProcessor clientSocketProcessor) throws InterruptedException {
-        LogoutCommand logoutCommand = (LogoutCommand) command;
+    public void processConcreteCommand(LogoutCommand logoutCommand, ClientSocketProcessor clientSocketProcessor) throws InterruptedException {
 
         UserLogoutEvent userLogoutEvent = new UserLogoutEvent();
         String userName = clientSocketProcessor.getUserInfo().getUserName();
@@ -29,6 +28,8 @@ public class LogoutCommandHandler implements CommandHandler  {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
+        // todo rempve clientSocketProcessor from client manager
 
     }
 }
