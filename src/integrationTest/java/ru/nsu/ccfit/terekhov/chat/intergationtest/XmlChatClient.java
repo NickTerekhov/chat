@@ -1,6 +1,10 @@
 package ru.nsu.ccfit.terekhov.chat.intergationtest;
 
+import org.w3c.dom.Document;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory.XmlTransformerFactory;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.XmlCommandTransfomer;
+import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -9,6 +13,7 @@ import java.net.Socket;
  * A simple chat client for integration test
  */
 public class XmlChatClient {
+    private final XmlTransformerFactory xmlTransformerFactory = new XmlTransformerFactory();
     private final String host;
     private final int port;
 
@@ -29,6 +34,8 @@ public class XmlChatClient {
     }
 
     public void send(Command command) {
-
+        XmlCommandTransfomer transformer = xmlTransformerFactory.getTransformer(command);
+        Document xmlDocument = transformer.createXml(command);
+        //XmlUtils.toString()
     }
 }

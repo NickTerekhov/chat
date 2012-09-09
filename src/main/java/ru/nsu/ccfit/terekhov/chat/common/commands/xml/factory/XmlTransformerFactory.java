@@ -8,7 +8,7 @@ import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.ListCommandTr
 import java.util.HashMap;
 import java.util.Map;
 
-public class XmlCommandFactory
+public class XmlTransformerFactory
 {
 
 	private static final Map<String, XmlCommandTransfomer> commandCreatorMap =
@@ -22,15 +22,24 @@ public class XmlCommandFactory
 
     private CommandNameResolver commandNameResolver = new CommandNameResolver();
 
-	public Command getCommand(Document xmlDocument)
-	{
-		String commandName = commandNameResolver.resolveName(xmlDocument);
-		
-		if( commandCreatorMap.containsKey(commandName) ) {
-			XmlCommandTransfomer commandTransfomer = commandCreatorMap.get(commandName);
-			return commandTransfomer.createCommand(xmlDocument);
-		}
-		throw new IllegalArgumentException(String.format("Command with name %s not exists", commandName));
-	}
+    public XmlCommandTransfomer getTransformer(Document xmlDocument) {
+        String commandName = commandNameResolver.resolveName(xmlDocument);
+        return getTransformer(commandName);
+    }
+
+    public XmlCommandTransfomer getTransformer(Command command) {
+        String commandName = command.getName();
+        return getTransformer(commandName);
+    }
+
+    private XmlCommandTransfomer getTransformer(String commandName) {
+        if( commandCreatorMap.containsKey(commandName) ) {
+            return commandCreatorMap.get(commandName);
+        }
+        throw new IllegalArgumentException(String.format("Command with name %s not exists", commandName));
+    }
+
+
+
 
 }

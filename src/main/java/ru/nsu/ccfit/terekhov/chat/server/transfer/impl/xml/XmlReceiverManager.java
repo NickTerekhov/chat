@@ -4,7 +4,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.Command;
-import ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory.XmlCommandFactory;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.factory.XmlTransformerFactory;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.stream.XmlStreamReader;
+import ru.nsu.ccfit.terekhov.chat.common.commands.xml.transformers.XmlCommandTransfomer;
 import ru.nsu.ccfit.terekhov.chat.common.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.server.processor.CommandTask;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ReceiverManager;
@@ -18,7 +20,7 @@ public class XmlReceiverManager implements ReceiverManager {
     private final Socket clientSocket;
     private final InputStream inputStream;
     private final XmlClientSocketProcessor clientSocketProcessor;
-    private final XmlCommandFactory commandFactory = new XmlCommandFactory();
+    private final XmlTransformerFactory transformerFactory = new XmlTransformerFactory();
 
     private boolean closed = false;
     private Thread currentThread;
@@ -32,18 +34,15 @@ public class XmlReceiverManager implements ReceiverManager {
     @Override
     public void run() {
         currentThread = Thread.currentThread();
-        DataInputStream socketReader = new DataInputStream(inputStream);
+        XmlStreamReader xmlStreamReader = new XmlStreamReader(inputStream);
         for (; ; ) {
             if (Thread.currentThread().isInterrupted()) {
                 System.out.println("Receiver Thread is interrupted");
                 return;
             }
             try {
-                int messageLength = socketReader.readInt();
-                byte[] messageData = new byte[messageLength];
-                socketReader.readFully(messageData);
-                String message = new String(messageData);
-                processMessage(message);
+                Document xmlDocument = xmlStreamReader.read();
+                processMessage(xmlDocument);
 
             } catch (IOException e) {
                 try {
@@ -81,9 +80,9 @@ public class XmlReceiverManager implements ReceiverManager {
 
     }
 
-    private void processMessage(String message) throws IOException, SAXException, ParserConfigurationException, InterruptedException {
-        Document xmlDocument = XmlUtils.fromString(message);
-        Command command = commandFactory.getCommand(xmlDocument);
+    private void processMessage(Document xmlDocument) throws IOException, SAXException, ParserConfigurationException, InterruptedException {
+         XmlCommandTransfomer commandTransformer = transformerFactory.getTransformer(xmlDocument);
+        Command command = commandTransformer.createCommand(xmlDocument);
         CommandTask commandTask = new CommandTask(clientSocketProcessor, command);
         clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
         // Some workaround to stop read from socket if client send logout command
