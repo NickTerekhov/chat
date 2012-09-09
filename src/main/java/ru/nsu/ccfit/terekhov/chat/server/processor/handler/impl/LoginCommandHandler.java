@@ -1,13 +1,9 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
 
-import ru.nsu.ccfit.terekhov.chat.server.ClientManager;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.*;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.ErrorAnswer;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.UserLoginEvent;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
 public class LoginCommandHandler extends AbstractCommandHandler<LoginCommand>
 {

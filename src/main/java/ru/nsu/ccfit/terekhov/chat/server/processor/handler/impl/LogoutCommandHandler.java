@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
 
-import ru.nsu.ccfit.terekhov.chat.server.ClientManager;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientManager;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.UserLogoutEvent;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;

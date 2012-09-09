@@ -1,10 +1,10 @@
-package ru.nsu.ccfit.terekhov.chat.server;
+package ru.nsu.ccfit.terekhov.chat.server.transfer.common;
 
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
-import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.TransferManager;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
