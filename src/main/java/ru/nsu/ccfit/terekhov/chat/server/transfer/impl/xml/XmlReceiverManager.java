@@ -35,7 +35,7 @@ public class XmlReceiverManager implements ReceiverManager {
         DataInputStream socketReader = new DataInputStream(inputStream);
         for (; ; ) {
             if (Thread.currentThread().isInterrupted()) {
-               System.out.println("Receiver Thread is interrupted");
+                System.out.println("Receiver Thread is interrupted");
                 return;
             }
             try {
@@ -43,7 +43,7 @@ public class XmlReceiverManager implements ReceiverManager {
                 byte[] messageData = new byte[messageLength];
                 socketReader.readFully(messageData);
                 String message = new String(messageData);
-               processMessage(message);
+                processMessage(message);
 
             } catch (IOException e) {
                 try {
@@ -52,7 +52,6 @@ public class XmlReceiverManager implements ReceiverManager {
                     // Restore the interrupted status
                     Thread.currentThread().interrupt();
                 }
-
 
 
             } catch (SAXException e) {
@@ -77,6 +76,7 @@ public class XmlReceiverManager implements ReceiverManager {
             LogoutCommand logoutCommand = new LogoutCommand();
             CommandTask commandTask = new CommandTask(clientSocketProcessor, logoutCommand);
             clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
+            currentThread.interrupt();
         }
 
     }
@@ -86,7 +86,8 @@ public class XmlReceiverManager implements ReceiverManager {
         Command command = commandFactory.getCommand(xmlDocument);
         CommandTask commandTask = new CommandTask(clientSocketProcessor, command);
         clientSocketProcessor.getCommandProcessor().addCommandTask(commandTask);
-        if ( command.getName().equals("logout") ) {
+        // Some workaround to stop read from socket if client send logout command
+        if (command.getName().equals("logout")) {
             currentThread.interrupt();
         }
 

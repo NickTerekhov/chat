@@ -6,6 +6,7 @@ import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.XmlCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.ListCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LoginCommandCreator;
 import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.LogoutCommandCreator;
+import ru.nsu.ccfit.terekhov.chat.server.commands.xml.creator.impl.MessageCommandCreator;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class XmlCommandFactory
 		commandCreatorMap.put("login", new LoginCommandCreator());
         commandCreatorMap.put("logout", new LogoutCommandCreator());
         commandCreatorMap.put("list", new ListCommandCreator());
+        commandCreatorMap.put("message", new MessageCommandCreator());
 	}
 
     private CommandNameResolver commandNameResolver = new CommandNameResolver();

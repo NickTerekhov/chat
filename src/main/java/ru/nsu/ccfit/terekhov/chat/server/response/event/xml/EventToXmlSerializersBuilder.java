@@ -1,7 +1,9 @@
 package ru.nsu.ccfit.terekhov.chat.server.response.event.xml;
 
+import ru.nsu.ccfit.terekhov.chat.server.response.event.base.MessageEvent;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.base.UserLoginEvent;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.common.Event;
+import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.serializer.MessageEventSerializer;
 import ru.nsu.ccfit.terekhov.chat.server.response.event.xml.serializer.UserLoginEventSerializer;
 
 import java.util.HashMap;
@@ -14,6 +16,7 @@ public class EventToXmlSerializersBuilder
 
 	static {
 		seralizerMap.put(UserLoginEvent.class, new UserLoginEventSerializer());
+        seralizerMap.put(MessageEvent.class, new MessageEventSerializer());
 	}
 
 	public EventToXmlSerializer getSeralizer(Event event) {

@@ -13,17 +13,11 @@ public class UserLoginEventSerializer extends AbstractEventSerializer<UserLoginE
 {
 
     @Override
-    protected Document serialize(UserLoginEvent userLoginEvent) {
-        Document eventDocument = XmlUtils.createDocument();
+    protected void serialize(UserLoginEvent userLoginEvent, Element rootElement) {
+        Document xmlDocument = rootElement.getOwnerDocument();
 
-        Element rootElement = eventDocument.createElement("event");
-        XmlUtils.setAttribute(rootElement, "name", userLoginEvent.getName());
-        eventDocument.appendChild(rootElement);
-
-        Element clientName = eventDocument.createElement("name");
-        clientName.appendChild(eventDocument.createTextNode(userLoginEvent.getUserName()));
+        Element clientName = xmlDocument.createElement("name");
+        clientName.appendChild(xmlDocument.createTextNode(userLoginEvent.getUserName()));
         rootElement.appendChild(clientName);
-
-        return eventDocument;
     }
 }

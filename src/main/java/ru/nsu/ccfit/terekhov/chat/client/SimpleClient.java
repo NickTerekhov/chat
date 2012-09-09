@@ -25,11 +25,18 @@ public class SimpleClient {
                 "</command>";
         sendAndRead(userListCommand, dataInputStream, dataOutputStream);
 
+        final String messageCommand = "<?xml version=\"1.0\"?>" +
+                "<command name=\"message\">" +
+                "<message>Hello, world</message>" +
+                "<session>12345</session>" +
+                "</command>";
+        sendAndRead(messageCommand, dataInputStream, dataOutputStream);
+
         final String logoutCommand = "<?xml version=\"1.0\"?>" +
                 "<command name=\"logout\">" +
                 "<session>12345</session>" +
                 "</command>";
-        sendCommand(logoutCommand, dataOutputStream);
+       // sendCommand(logoutCommand, dataOutputStream);
 
         socket.close();
     }
