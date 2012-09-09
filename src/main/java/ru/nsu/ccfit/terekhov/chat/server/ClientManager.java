@@ -50,10 +50,13 @@ public class ClientManager {
         }
     }
 
-    public List<UserInfo> getUsers() {
+    public List<UserInfo> getAcceptedUsers() {
         final List<UserInfo> userList = new ArrayList<UserInfo>();
         for (ClientSocketProcessor clientSocketProcessor : socketProcessorlist) {
-            userList.add(clientSocketProcessor.getUserInfo());
+            UserInfo userInfo = clientSocketProcessor.getUserInfo();
+            if (userInfo.getUserStatus() == UserStatus.ACCEPTED) {
+                userList.add(userInfo);
+            }
         }
         return userList;
     }

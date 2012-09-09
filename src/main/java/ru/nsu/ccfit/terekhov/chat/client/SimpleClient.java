@@ -17,20 +17,30 @@ public class SimpleClient {
                 "<name>userName</name>" +
                 "<type>SimpleClientV01</type>" +
                 "</command>";
+        sendAndRead(command, dataInputStream, dataOutputStream);
 
-        sendCommand(command, dataOutputStream);
-        String readCmd = readCommand(dataInputStream);
-
-
-        System.out.println("Readed:");
-        System.out.println(readCmd);
+        final String userListCommand = "<?xml version=\"1.0\"?>" +
+                "<command name=\"list\">" +
+                "<session>12345</session>" +
+                "</command>";
+        sendAndRead(userListCommand, dataInputStream, dataOutputStream);
 
         final String logoutCommand = "<?xml version=\"1.0\"?>" +
                 "<command name=\"logout\">" +
                 "<session>12345</session>" +
                 "</command>";
         sendCommand(logoutCommand, dataOutputStream);
+
         socket.close();
+    }
+
+    private static void sendAndRead(String command, DataInputStream dataInputStream, DataOutputStream dataOutputStream) throws IOException {
+        sendCommand(command, dataOutputStream);
+        String readCmd = readCommand(dataInputStream);
+
+
+        System.out.println("Readed:");
+        System.out.println(readCmd);
     }
 
     private static String readCommand(DataInputStream dataInputStream) throws IOException {

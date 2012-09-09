@@ -42,6 +42,7 @@ public final class XmlUtils
 
 	public static String toString(Document xmlDocument)
 	{
+        deleteNullNodes(xmlDocument.getDocumentElement());
 		try {
 			StringWriter sw = new StringWriter();
 			TransformerFactory tf = TransformerFactory.newInstance();
@@ -54,9 +55,26 @@ public final class XmlUtils
 			transformer.transform(new DOMSource(xmlDocument), new StreamResult(sw));
 			return sw.toString();
 		} catch (Exception ex) {
+            ex.printStackTrace();
 			throw new RuntimeException("Error converting to String", ex);
 		}
 	}
+
+    private static void deleteNullNodes(Node racine)
+    {
+        NodeList nl = racine.getChildNodes();
+        for (int i = 0; i < nl.getLength(); i++)
+        {
+            if (nl.item(i).getNodeType() == Node.TEXT_NODE && nl.item(i).getNodeValue() == null)
+            {
+                nl.item(i).getParentNode().removeChild(nl.item(i));
+            }
+            else
+            {
+                deleteNullNodes(nl.item(i));
+            }
+        }
+    }
 
     public static void setAttribute(Node node, String name, String value) {
         NamedNodeMap attributes = node.getAttributes();

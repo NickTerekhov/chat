@@ -26,6 +26,7 @@ public class LoginCommandHandler extends AbstractCommandHandler<LoginCommand>
 
 		UserInfo userInfo = clientSocketProcessor.getUserInfo();
 		userInfo.setUserName(loginCommand.getUserName());
+        userInfo.setClientType(loginCommand.getClientType());
         userInfo.setUserStatus(UserStatus.ACCEPTED);
 
 
