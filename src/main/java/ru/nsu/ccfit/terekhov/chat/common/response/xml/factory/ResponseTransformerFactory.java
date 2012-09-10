@@ -62,7 +62,7 @@ public class ResponseTransformerFactory
                     return transformer;
                 }
             }
-            throw new IllegalArgumentException("No transformers thst satisfy xml document");
+            throw new IllegalArgumentException("No transformers that satisfy xml document");
         }
 
 

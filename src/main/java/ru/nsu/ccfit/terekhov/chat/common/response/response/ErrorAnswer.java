@@ -7,6 +7,14 @@ public class ErrorAnswer implements Answer
 {
 	private String message;
 
+    public ErrorAnswer() {
+
+    }
+
+    public ErrorAnswer(String message) {
+        this.message = message;
+    }
+
 	public String getMessage()
 	{
 		return message;

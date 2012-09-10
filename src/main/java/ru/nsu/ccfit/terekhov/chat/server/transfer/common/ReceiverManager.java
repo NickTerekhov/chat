@@ -44,6 +44,7 @@ public class ReceiverManager implements Runnable, Closeable {
                 processMessage(command);
 
             } catch (IOException e) {
+                e.printStackTrace();
                 try {
                     sendLogoutCommand();
                 } catch (InterruptedException e1) {

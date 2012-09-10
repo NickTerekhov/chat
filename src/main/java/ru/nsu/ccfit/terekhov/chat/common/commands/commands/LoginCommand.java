@@ -10,6 +10,14 @@ public final class LoginCommand implements Command, Serializable
 	private String userName;
 	private String clientType;
 
+    public LoginCommand() {
+
+    }
+    public LoginCommand(String userName, String clientType) {
+        this.userName = userName;
+        this.clientType = clientType;
+    }
+
 	public String getUserName()
 	{
 		return userName;

@@ -8,6 +8,32 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAnswer> {
+    private static final String DOCUMENT_SCHEMA = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+            "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
+            "<xs:element name=\"success\">\n" +
+            "    <xs:complexType>\n" +
+            "      <xs:sequence>\n" +
+            "       <xs:element name=\"listusers\">\n" +
+            "           <xs:complexType>\n" +
+            "               <xs:sequence>\n" +
+            "                   <xs:element name=\"user\" type=\"UserType\" minOccurs=\"0\" maxOccurs=\"unbounded\" />\n" +
+            "               </xs:sequence>\n" +
+            "           </xs:complexType>\n" +
+            "       </xs:element>\n" +
+            "       </xs:sequence>\n" +
+            "   </xs:complexType>\n" +
+            "</xs:element>\n" +
+            "<xs:complexType name=\"UserType\">\n" +
+            "   <xs:sequence>\n" +
+            "       <xs:element name=\"name\" type='xs:string'/>\n" +
+            "       <xs:element name=\"type\" type='xs:string'/>\n" +
+            "    </xs:sequence>\n" +
+            "</xs:complexType>\n" +
+            "</xs:schema>";
+
+    public ListAnswerTransformer() {
+        super(DOCUMENT_SCHEMA);
+    }
 
     @Override
     protected void buildAnswer(UserListAnswer answer, Element rootElement) {

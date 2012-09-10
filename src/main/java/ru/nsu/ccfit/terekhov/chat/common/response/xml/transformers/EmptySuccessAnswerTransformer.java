@@ -7,6 +7,16 @@ import ru.nsu.ccfit.terekhov.chat.common.response.response.EmptySuccessAnswer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EmptySuccessAnswerTransformer extends AbstractAnswerTransformer<EmptySuccessAnswer> {
+    private static final String DOCUMENT_SCHEMA = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+            "<xs:schema\n" +
+            "  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
+            "  <xs:element name=\"success\"/>\n" +
+            "</xs:schema>";
+
+    public EmptySuccessAnswerTransformer() {
+        super(DOCUMENT_SCHEMA);
+    }
+
     @Override
     protected void buildAnswer(EmptySuccessAnswer answer, Element rootElement) {
         // answer id empty = do nothing

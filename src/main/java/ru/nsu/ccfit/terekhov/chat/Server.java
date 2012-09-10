@@ -41,6 +41,7 @@ public class Server implements Runnable {
 
                 try {
                     final Socket clientSocket = serverSocket.accept();
+                    System.out.println(String.format("Client %s connected", clientSocket.getRemoteSocketAddress().toString()));
                     processClientSocket(clientSocket);
                 } catch (SocketException e) {
                     System.out.println("Shutdowing server");
