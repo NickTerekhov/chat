@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.server.transfer.common;
 
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Event;
+import ru.nsu.ccfit.terekhov.chat.common.response.response.UserLoginEvent;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
@@ -59,5 +60,15 @@ public class ClientManager {
             }
         }
         return userList;
+    }
+
+    public void sendEventToAllUsersExceptSpecified(Event event, String userName) throws InterruptedException {
+        for (ClientSocketProcessor clientSocketProcessor : socketProcessorlist) {
+            if (clientSocketProcessor.getUserInfo().getUserStatus() == UserStatus.ACCEPTED
+                    && !clientSocketProcessor.getUserInfo().getUserName().equals(userName)) {
+                TransferManager transferManager = clientSocketProcessor.getTransferManager();
+                transferManager.sendResponse(event);
+            }
+        }
     }
 }

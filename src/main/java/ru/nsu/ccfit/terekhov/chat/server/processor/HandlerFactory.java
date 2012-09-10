@@ -1,11 +1,11 @@
 package ru.nsu.ccfit.terekhov.chat.server.processor;
 
 import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.ListCommandHandler;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.LoginCommandHandler;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.LogoutCommandHandler;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl.MessageCommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.CommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.ListCommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.LoginCommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.LogoutCommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.MessageCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;

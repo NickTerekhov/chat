@@ -1,7 +1,7 @@
-package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
+package ru.nsu.ccfit.terekhov.chat.server.processor.handler;
 
 import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
-import ru.nsu.ccfit.terekhov.chat.server.processor.handler.common.CommandHandler;
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.CommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientSocketProcessor;
 
 public abstract class AbstractCommandHandler<T extends Command> implements CommandHandler {

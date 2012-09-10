@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat;
+package ru.nsu.ccfit.terekhov.chat.server;
 
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientManager;
 import ru.nsu.ccfit.terekhov.chat.server.processor.ClientCommandProcessor;
@@ -50,9 +50,7 @@ public class Server implements Runnable {
 
                     // serversocket must be already closed by calling interrupt() method
                     List<Runnable> activeTasks = threadPool.shutdownNow();
-                     for( Runnable task : activeTasks ) {
 
-                     }
                     return;
 
 

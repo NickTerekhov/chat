@@ -1,5 +1,6 @@
-package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
+package ru.nsu.ccfit.terekhov.chat.server.processor.handler;
 
+import ru.nsu.ccfit.terekhov.chat.server.processor.handler.AbstractCommandHandler;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.ClientManager;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.UserLogoutEvent;
@@ -8,7 +9,7 @@ import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserStatus;
 
 import java.io.IOException;
 
-public class LogoutCommandHandler extends AbstractCommandHandler<LogoutCommand>  {
+public class LogoutCommandHandler extends AbstractCommandHandler<LogoutCommand> {
 
     @Override
     public void processConcreteCommand(LogoutCommand logoutCommand, ClientSocketProcessor clientSocketProcessor) throws InterruptedException {

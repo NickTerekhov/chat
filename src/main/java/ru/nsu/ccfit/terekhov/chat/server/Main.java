@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat;
+package ru.nsu.ccfit.terekhov.chat.server;
 
 import java.io.IOException;
 import java.util.Scanner;

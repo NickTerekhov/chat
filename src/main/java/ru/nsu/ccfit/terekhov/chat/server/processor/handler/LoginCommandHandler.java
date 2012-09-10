@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.terekhov.chat.server.processor.handler.impl;
+package ru.nsu.ccfit.terekhov.chat.server.processor.handler;
 
 import ru.nsu.ccfit.terekhov.chat.common.response.response.SessionSuccessAnswer;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.*;
@@ -30,15 +30,13 @@ public class LoginCommandHandler extends AbstractCommandHandler<LoginCommand>
 
 		UserLoginEvent userLoginEvent = new UserLoginEvent();
 		userLoginEvent.setUserName(loginCommand.getUserName());
-		clientManager.sendEventToAllUsers(userLoginEvent);
+		clientManager.sendEventToAllUsersExceptSpecified(userLoginEvent, loginCommand.getUserName());
 
 
 	}
 
 	private void sendError(String userName, TransferManager transferManager) throws InterruptedException
 	{
-		ErrorAnswer response =  new ErrorAnswer();
-		response.setMessage(String.format("User woth name %s already exists", userName));
-		transferManager.sendResponse(response);
+		transferManager.sendResponse(new ErrorAnswer(String.format("User with name %s already exists", userName)));
 	}
 }

@@ -2,10 +2,16 @@ package ru.nsu.ccfit.terekhov.chat.common.response.xml.transformers;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.UserListAnswer;
+import ru.nsu.ccfit.terekhov.chat.common.xml.utils.XmlUtils;
 import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAnswer> {
     private static final String DOCUMENT_SCHEMA = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
@@ -41,7 +47,7 @@ public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAns
         Element userListElement = xmlDocument.createElement("listusers");
         rootElement.appendChild(userListElement);
 
-        for( UserInfo userInfo : answer.getUsers() ) {
+        for (UserInfo userInfo : answer.getUsers()) {
             Element user = createUserElement(userInfo, xmlDocument);
             userListElement.appendChild(user);
         }
@@ -61,7 +67,23 @@ public class ListAnswerTransformer extends AbstractAnswerTransformer<UserListAns
 
     @Override
     public Response documentToResponse(Document document) {
-        throw new NotImplementedException();
+        Node listUsereElement = document.getElementsByTagName("listusers").item(0);
+        NodeList userNodes = listUsereElement.getChildNodes();
+        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+        for (int i = 0; i < userNodes.getLength(); i++) {
+            if (userNodes.item(i).getNodeName().equals("user")) {
+                Element userElement = (Element) userNodes.item(i);
+                UserInfo userInfo = new UserInfo();
+                userInfo.setUserName(XmlUtils.getNestedTagValue(userElement, "name"));
+                userInfo.setClientType(XmlUtils.getNestedTagValue(userElement, "type"));
+                userInfoList.add(userInfo);
+            }
+        }
+
+        UserListAnswer userListAnswer = new UserListAnswer();
+        userListAnswer.setUsers(userInfoList);
+
+        return userListAnswer;
     }
 
     @Override

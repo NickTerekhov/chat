@@ -23,6 +23,15 @@ public class ListCommandTransfomer implements XmlCommandTransfomer<ListCommand>
 
     @Override
     public Document createXml(ListCommand command) {
-        throw new NotImplementedException();
+        Document xmlDocument = XmlUtils.createDocument();
+        Element rootElement = xmlDocument.createElement("command");
+        rootElement.setAttribute("name", "list");
+        xmlDocument.appendChild(rootElement);
+
+        Element nameElement = xmlDocument.createElement("session");
+        rootElement.appendChild(nameElement);
+        nameElement.appendChild(xmlDocument.createTextNode(command.getSession()));
+
+        return xmlDocument;
     }
 }
