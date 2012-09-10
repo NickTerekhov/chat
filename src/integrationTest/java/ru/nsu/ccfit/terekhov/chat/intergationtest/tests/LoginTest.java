@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.intergationtest.tests;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +8,15 @@ import ru.nsu.ccfit.terekhov.chat.Server;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
+import ru.nsu.ccfit.terekhov.chat.common.response.response.SessionSuccessAnswer;
 import ru.nsu.ccfit.terekhov.chat.intergationtest.XmlChatClient;
 
 import java.io.IOException;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class LoginTest {
@@ -46,7 +52,12 @@ public class LoginTest {
         chatClient.send(loginCommand);
 
         Response response = chatClient.get();
-        //assertThat( response.getClass(), is() )
+        assertThat( response, instanceOf(SessionSuccessAnswer.class) );
+        assertThat( ((SessionSuccessAnswer) response).getSession(), notNullValue() ) ;
+    }
+
+    @Test
+    public void TwoUserWithSameNames() {
 
     }
 }
