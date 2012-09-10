@@ -3,6 +3,7 @@ package ru.nsu.ccfit.terekhov.chat.client.gui;
 import net.miginfocom.swing.MigLayout;
 import ru.nsu.ccfit.terekhov.chat.client.model.EnterResult;
 import ru.nsu.ccfit.terekhov.chat.client.model.ServerManager;
+import ru.nsu.ccfit.terekhov.chat.client.model.events.EventReceiver;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.ListCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
@@ -20,7 +21,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements EventReceiver{
     private final ServerManager serverManager;
     private MessageArea messageArea;
     private UserListPanel userListPanel;
@@ -124,5 +125,10 @@ public class MainFrame extends JFrame {
 
     private void enabledSendControls(boolean enabled) {
         sendMessageButton.setEnabled(enabled);
+    }
+
+    @Override
+    public void displayMessage(String user, String message) {
+        messageArea.displayMessage(user, message);
     }
 }

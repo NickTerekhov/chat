@@ -13,6 +13,7 @@ public class Main {
                 XmlServerManager serverManager = new XmlServerManager();
 
                 MainFrame mainFrame = new MainFrame(serverManager);
+                serverManager.setEventReceiver(mainFrame);
                 mainFrame.setVisible(true);
             }
         });

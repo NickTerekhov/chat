@@ -26,6 +26,7 @@ public class UserNameDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserNameDialog.this.userName = userNameField.getText();
+                UserNameDialog.this.dispose();
             }
         });
     }

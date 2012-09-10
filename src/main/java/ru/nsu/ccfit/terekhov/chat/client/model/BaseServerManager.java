@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.terekhov.chat.client.model;
 
+import ru.nsu.ccfit.terekhov.chat.client.model.events.EventHandlerFactory;
+import ru.nsu.ccfit.terekhov.chat.client.model.events.EventReceiver;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.ListCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LoginCommand;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.LogoutCommand;
@@ -28,9 +30,10 @@ public abstract class BaseServerManager implements ServerManager {
     protected UserData userData;
     protected boolean connected = false;
     protected boolean entered = false;
+    private EventHandlerFactory handlerFactory;
+    private EventReceiver eventReceiver;
 
     protected abstract ResponseReader createResponseReader(InputStream inputStream);
-
     protected abstract CommandWriter createCommandWriter(OutputStream outputStream);
 
     public void connect(String server, int port) throws IOException {
@@ -41,10 +44,16 @@ public abstract class BaseServerManager implements ServerManager {
         responseReader = createResponseReader(socket.getInputStream());
         commandWriter = createCommandWriter(socket.getOutputStream());
 
-        responseReceiver = new ResponseReceiver(responseReader);
+        assert null != eventReceiver;
+        handlerFactory = new EventHandlerFactory(eventReceiver);
+        responseReceiver = new ResponseReceiver(responseReader, handlerFactory);
         responseReceiverThread = new Thread(responseReceiver);
         responseReceiverThread.start();
         connected = true;
+    }
+
+    public void setEventReceiver(EventReceiver eventReceiver) {
+        this.eventReceiver = eventReceiver;
     }
 
     @Override
