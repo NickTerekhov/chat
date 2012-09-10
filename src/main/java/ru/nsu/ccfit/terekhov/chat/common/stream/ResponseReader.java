@@ -7,5 +7,5 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 public interface ResponseReader {
-    Response read() throws IOException, SAXException, ParserConfigurationException;
+    Response read() throws IOException;
 }

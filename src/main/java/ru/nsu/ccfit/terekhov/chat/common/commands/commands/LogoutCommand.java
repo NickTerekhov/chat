@@ -8,6 +8,14 @@ import ru.nsu.ccfit.terekhov.chat.common.commands.common.Command;
  */
 public final class LogoutCommand implements Command
 {
+    public LogoutCommand() {
+
+    }
+
+    public LogoutCommand(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
      private String sessionId;
 
     public String getSessionId() {
