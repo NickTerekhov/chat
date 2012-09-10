@@ -20,4 +20,6 @@ public interface ServerManager extends Closeable {
     UserData getUserData();
 
     void logout() throws IOException;
+
+    void requestUserList() throws IOException;
 }

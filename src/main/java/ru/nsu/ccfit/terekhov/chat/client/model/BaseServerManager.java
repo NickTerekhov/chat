@@ -102,6 +102,7 @@ public abstract class BaseServerManager implements ServerManager {
         if (answer instanceof SessionSuccessAnswer) {
             String session = ((SessionSuccessAnswer) answer).getSession();
             userData = new UserData(userName, session);
+            entered = true;
             return new EnterResult(answer, true);
         } else {
             return new EnterResult(answer, false);
@@ -122,6 +123,14 @@ public abstract class BaseServerManager implements ServerManager {
             }
         } finally {
             close();
+        }
+    }
+
+    @Override
+    public void requestUserList() throws IOException {
+        if( isEntered() ) {
+            ListCommand listCommand = new ListCommand(userData.getSession());
+            send(listCommand);
         }
     }
 }

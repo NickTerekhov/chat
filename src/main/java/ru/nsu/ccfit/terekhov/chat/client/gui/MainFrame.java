@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.terekhov.chat.client.gui;
 
+import net.miginfocom.swing.MigLayout;
 import ru.nsu.ccfit.terekhov.chat.client.model.EnterResult;
 import ru.nsu.ccfit.terekhov.chat.client.model.ServerManager;
 import ru.nsu.ccfit.terekhov.chat.common.commands.commands.ListCommand;
@@ -9,21 +10,46 @@ import ru.nsu.ccfit.terekhov.chat.common.response.common.Answer;
 import ru.nsu.ccfit.terekhov.chat.common.response.common.Response;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.ErrorAnswer;
 import ru.nsu.ccfit.terekhov.chat.common.response.response.SessionSuccessAnswer;
+import ru.nsu.ccfit.terekhov.chat.common.response.response.UserListAnswer;
+import ru.nsu.ccfit.terekhov.chat.server.transfer.common.UserInfo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     private final ServerManager serverManager;
+    private MessageArea messageArea;
+    private UserListPanel userListPanel;
+    private JTextArea inputMessageTextarea;
+    private JButton sendMessageButton;
 
     public MainFrame(ServerManager serverManager) {
         this.serverManager = serverManager;
         setSize(800, 600);
         setTitle("Chat client");
+        createLayout();
+        enabledSendControls(false);
         createMenu();
+
+    }
+
+    private void createLayout() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new MigLayout());
+        setContentPane(mainPanel);
+        messageArea = new MessageArea();
+        mainPanel.add(messageArea, "width 100:100:100, height 100:100:100");
+        userListPanel = new UserListPanel();
+        mainPanel.add(userListPanel, "width 100:100:100, height 100:100:100, wrap");
+        inputMessageTextarea = new JTextArea();
+        mainPanel.add(inputMessageTextarea, "width 100:100:100, height 100:100:100");
+        sendMessageButton = new JButton("Send message");
+
+        mainPanel.add(sendMessageButton);
 
     }
 
@@ -61,6 +87,11 @@ public class MainFrame extends JFrame {
 
                     }
 
+                    serverManager.requestUserList();
+                    UserListAnswer userListAnswer = (UserListAnswer) serverManager.getReadedAnswer();
+                    List<UserInfo> userList = userListAnswer.getUsers();
+                    userListPanel.setUsers(userList);
+                    enabledSendControls(true);
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(MainFrame.this,
                             "Error connect to server",
@@ -89,5 +120,9 @@ public class MainFrame extends JFrame {
                 }
             }
         });
+    }
+
+    private void enabledSendControls(boolean enabled) {
+        sendMessageButton.setEnabled(enabled);
     }
 }
