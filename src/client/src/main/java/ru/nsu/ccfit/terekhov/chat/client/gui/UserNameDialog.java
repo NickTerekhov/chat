@@ -10,7 +10,9 @@ public class UserNameDialog extends JDialog {
 
     public UserNameDialog(JFrame owner) {
         super(owner, "Enter username", true);
-        setSize(300, 400);
+        setSize(300, 100);
+        setLocationRelativeTo(owner);
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new MigLayout("wrap 2"));
         setContentPane(mainPanel);
@@ -18,7 +20,7 @@ public class UserNameDialog extends JDialog {
         JLabel userNameLabel = new JLabel("Enter user name");
         mainPanel.add(userNameLabel);
         final JTextField userNameField = new JTextField("user");
-        mainPanel.add(userNameField);
+        mainPanel.add(userNameField, "width 150");
 
         JButton okButton = new JButton("ok");
         mainPanel.add(okButton);

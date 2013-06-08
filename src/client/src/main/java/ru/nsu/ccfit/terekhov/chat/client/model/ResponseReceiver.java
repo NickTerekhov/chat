@@ -58,7 +58,7 @@ public class ResponseReceiver implements Runnable {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
                 for( ReceiverErrorHandler errorHandler : errorHandlerList ) {
                     errorHandler.processError(e);
                 }

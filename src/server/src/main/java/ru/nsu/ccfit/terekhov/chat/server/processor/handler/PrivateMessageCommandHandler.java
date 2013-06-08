@@ -19,6 +19,7 @@ public class PrivateMessageCommandHandler extends AbstractCommandHandler<Private
         messageEvent.setUser(userName);
 
         clientSocketProcessor.getTransferManager().sendResponse(new EmptySuccessAnswer());
+        clientSocketProcessor.getTransferManager().sendResponse(messageEvent);
         clientSocketProcessor.getClientManager().sendEventToConcreteUser(messageEvent, messageCommand.getUser());
 
 

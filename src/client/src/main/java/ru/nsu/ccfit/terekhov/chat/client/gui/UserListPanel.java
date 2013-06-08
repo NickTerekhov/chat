@@ -15,7 +15,7 @@ public class UserListPanel extends JPanel {
 
     public UserListPanel() {
         setLayout(new MigLayout("wrap 1"));
-        setBackground(Color.RED);
+        setBorder(BorderFactory.createTitledBorder("User list"));
         paintUsers();
     }
 
@@ -37,7 +37,12 @@ public class UserListPanel extends JPanel {
         for( String user : users) {
             userSelector.addItem(user);
         }
-        add(userSelector);
+
+        JPanel userSelectorPanel = new JPanel();
+        userSelectorPanel.setLayout(new MigLayout());
+        userSelectorPanel.add(new JLabel("Select user"));
+        userSelectorPanel.add(userSelector);
+        add(userSelectorPanel);
 
         revalidate();
         repaint();

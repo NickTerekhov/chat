@@ -11,7 +11,8 @@ public class NewConnectionDialog extends JDialog {
 
     public NewConnectionDialog(JFrame owner) {
         super(owner, "New connection", true);
-        setSize(300, 400);
+        setSize(300, 150);
+        setLocationRelativeTo(owner);
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new MigLayout("wrap 2"));
         setContentPane(mainPanel);
@@ -20,13 +21,13 @@ public class NewConnectionDialog extends JDialog {
         mainPanel.add(serverLabel);
         final JTextField serverField = new JTextField();
         serverField.setText("localhost");
-        mainPanel.add(serverField);
+        mainPanel.add(serverField, "width 150");
 
         final JLabel serverPort = new JLabel("Server port");
         mainPanel.add(serverPort);
         final JTextField serverPortField = new JTextField();
         serverPortField.setText("9999");
-        mainPanel.add(serverPortField);
+        mainPanel.add(serverPortField, "width 150");
 
 
         JButton okButton = new JButton("ok");

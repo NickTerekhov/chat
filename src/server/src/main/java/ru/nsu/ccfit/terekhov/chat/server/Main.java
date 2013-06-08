@@ -8,25 +8,9 @@ public class Main {
     private static Thread serverThread = null;
 
     public static void main(String[] args) throws IOException, InterruptedException {
+          startServer();
 
 
-        Scanner scanner = new Scanner(System.in);
-        for (; ; ) {
-            System.out.println("Enter command:");
-            String command = scanner.nextLine();
-            if (command.equals("start")) {
-                if (server == null) {
-                    startServer();
-                }
-            } else if (command.equals("stop")) {
-                stopServer(serverThread);
-            } else if (command.equals("exit")) {
-                stopServer(serverThread);
-                return;
-            } else {
-                System.out.println("Unknown command: " + command);
-            }
-        }
 
 
     }
@@ -39,14 +23,5 @@ public class Main {
         System.out.println("Server started");
     }
 
-    private static void stopServer(Thread serverThread) throws InterruptedException, IOException {
-        System.exit(0);
-        if (null != server) {
-            System.out.println("Stopping server");
-            server.interrupt();
-            serverThread.join();
-            server = null;
-            System.out.println("Server stopped");
-        }
-    }
+
 }

@@ -15,13 +15,15 @@ public class ResponseTransformerFactory
 	private static Map<Class<? extends Response>, AnswerTransformer> serzlizerMap
 			= new HashMap<Class<? extends Response>, AnswerTransformer>();
     private static Map<String, ResponseTransformer> eventMap = new HashMap<String, ResponseTransformer>();
-	static {
+
+    static {
 		serzlizerMap.put(ErrorAnswer.class, new ErrorAnswerTransformer());
         serzlizerMap.put(UserListAnswer.class, new ListAnswerTransformer());
         serzlizerMap.put(EmptySuccessAnswer.class, new EmptySuccessAnswerTransformer());
         serzlizerMap.put(SessionSuccessAnswer.class, new SessionAnswerTransformer());
 
         eventMap.put("userlogin", new UserLoginEventTransformer());
+        eventMap.put("userlogout", new UserLogoutEventTransformer());
         eventMap.put("message", new MessageEventTransformer());
 	}
 	
@@ -43,6 +45,7 @@ public class ResponseTransformerFactory
         if( eventMap.containsKey(eventName) ) {
             return eventMap.get(eventName);
         }
+        System.out.println("Unknown event: " + eventName);
         throw new IllegalArgumentException();
     }
 

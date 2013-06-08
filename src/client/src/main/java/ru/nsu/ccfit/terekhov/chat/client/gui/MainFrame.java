@@ -28,14 +28,14 @@ public class MainFrame extends JFrame implements EventReceiver {
     private final ServerManager serverManager;
     private MessageArea messageArea;
     private UserListPanel userListPanel;
-    private JTextArea inputMessageTextarea;
+    private SendArea inputMessageTextarea;
     private JButton sendMessageButton;
     private ReceiverErrorHandler errorHandler;
 
     public MainFrame(ServerManager serverManager) {
         this.serverManager = serverManager;
 
-        setSize(800, 600);
+        setSize(700, 550);
         setTitle("Chat client");
         createLayout();
         enabledSendControls(false);
@@ -56,11 +56,11 @@ public class MainFrame extends JFrame implements EventReceiver {
         mainPanel.setLayout(new MigLayout());
         setContentPane(mainPanel);
         messageArea = new MessageArea();
-        mainPanel.add(messageArea, "width 100:100:100, height 100:100:100");
+        mainPanel.add(messageArea, "width 400, height 300");
         userListPanel = new UserListPanel();
-        mainPanel.add(userListPanel, "width 100:100:100, height 100:100:100, wrap");
-        inputMessageTextarea = new JTextArea();
-        mainPanel.add(inputMessageTextarea, "width 100:100:100, height 100:100:100");
+        mainPanel.add(userListPanel, "width 200, height 300, wrap");
+        inputMessageTextarea = new SendArea();
+        mainPanel.add(inputMessageTextarea, "width 400, height 100, wrap");
 
         sendMessageButton = new JButton("Send message");
         addSendHandler(sendMessageButton);
